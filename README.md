@@ -21,7 +21,8 @@ pnpm test       # 채점 로직 테스트
 ## 데이터 추가
 
 - 개념: `src/data/subjects/written.ts`, `practical.ts` (실기는 필기 개념을 재사용)
-- 문제: `src/data/questions/<폴더>/*.ts` 에 추가하고 `src/data/questions/index.ts`에 합친다.
+- 문제: `src/data/questions/<폴더>/*.ts` 에 추가하고 `src/data/questions/index.ts`에 합친다. (`sample` 예시 · `frequent` 빈출 · `supplement` 보강 개념용)
   - 객관식: `type: 'choice'`, `answer`는 보기 인덱스(0부터)
   - 주관식: `type: 'short'`, `answer`는 인정 정답 목록 (공백 · 대소문자 무시 채점)
 - 현재 문제는 빈출 주제 기반 변형 문제이며 기출 원문이 아니다.
+- 시험 정보(`/info`): `src/data/examInfo.ts`. 회차별 일정은 해마다 바뀌므로 넣지 않고 Q-Net 링크로 안내한다.
