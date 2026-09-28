@@ -132,6 +132,42 @@ m[1][2]            // 6  (1행 2열, 0부터 센다)`,
   tip: '<< n 은 × 2ⁿ, >> n 은 ÷ 2ⁿ',
 }
 
+const cStruct: Concept = {
+  title: 'C 구조체',
+  level: 2,
+  summary: '여러 자료형을 하나로 묶은 사용자 정의 타입. 변수는 점(.), 포인터는 화살표(->)',
+  points: [
+    's.name: 구조체 변수의 멤버 / p->name: 구조체 포인터의 멤버 (= (*p).name)',
+    'typedef struct { … } Student; → 이후 struct 없이 Student로 선언',
+    '구조체 포인터 p++ 는 구조체 하나 크기만큼 다음 원소로 이동',
+  ],
+  code: `typedef struct {
+    char name[10];
+    int kor, eng;
+} Student;
+
+int main() {
+    Student s[3] = {{"Kim", 90, 80}, {"Lee", 70, 100}, {"Park", 85, 75}};
+    Student *p = &s[1];
+    int i, best = 0;
+    for (i = 1; i < 3; i++)
+        if (s[i].kor + s[i].eng > s[best].kor + s[best].eng) best = i;
+    printf("%s %d ", s[best].name, p->eng);
+    p++;
+    printf("%c", p->name[1]);
+}`,
+  table: {
+    head: ['단계', '해석', '값'],
+    rows: [
+      ['합계', 'Kim 170, Lee 170, Park 160', '-'],
+      ['best', '170 > 170 은 거짓 → 바뀌지 않음', '0 (Kim)'],
+      ['p->eng', 'p는 s[1] (Lee)', '100'],
+      ['p++ → p->name[1]', 'p는 s[2] (Park), 두 번째 글자', 'a'],
+    ],
+  },
+  tip: '> 와 >= 차이로 결과가 바뀐다 → 출력 Kim 100 a',
+}
+
 const javaInheritance: Concept = {
   title: 'Java 상속: 메소드 vs 필드',
   level: 3,
@@ -175,6 +211,40 @@ const javaTraps: Concept = {
 class B extends A { B() { System.out.print("B"); } }
 
 new B();   // 출력: AB  (부모 생성자 먼저)`,
+}
+
+const javaAbstract: Concept = {
+  title: 'Java 추상 클래스 · 인터페이스 · static',
+  level: 2,
+  summary: '추상 메소드는 자식이 반드시 구현하고, static 변수는 모든 객체가 하나를 나눠 쓴다',
+  points: [
+    'abstract 클래스: 몸체 없는 추상 메소드를 가질 수 있고, new로 직접 만들 수 없음 → extends로 상속',
+    'interface: 모든 메소드가 기본적으로 추상 (public abstract). implements로 구현, 여러 개 구현 가능',
+    'static 변수: 클래스에 하나만 존재 → 객체를 몇 개 만들든 공유 / 클래스명.변수로 접근',
+    'final: 변수는 값 변경 X, 메소드는 오버라이딩 X, 클래스는 상속 X',
+    'this: 자기 자신 객체 / super: 부모 객체',
+  ],
+  code: `abstract class Shape {
+    abstract int area();
+    void print() { System.out.print(area() + " "); }
+}
+class Rect extends Shape {
+    int w, h;
+    Rect(int w, int h) { this.w = w; this.h = h; }
+    int area() { return w * h; }
+}
+class Counter {
+    static int cnt = 0;
+    int id;
+    Counter() { cnt++; id = cnt; }
+}
+
+Shape s = new Rect(3, 4);
+s.print();                                  // 12
+Counter a = new Counter();
+Counter b = new Counter();
+System.out.print(a.id + " " + Counter.cnt); // 1 2`,
+  tip: 'id는 객체마다 따로, cnt는 모두 공유 → 출력 12 1 2',
 }
 
 const pythonList: Concept = {
@@ -263,6 +333,43 @@ DELETE FROM 학생 WHERE 학번 = 1001;`,
   tip: '권한은 줄 때 TO, 뺏을 때 FROM. UPDATE는 SET, INSERT는 VALUES',
 }
 
+const sqlDDL: Concept = {
+  title: 'CREATE TABLE · VIEW · 집합 연산',
+  level: 2,
+  summary: '제약 조건이 붙은 테이블 만들기와, 두 쿼리 결과 합치기',
+  code: `CREATE TABLE 학생 (
+    학번     INT PRIMARY KEY,
+    이름     VARCHAR(20) NOT NULL,
+    학년     INT CHECK (학년 BETWEEN 1 AND 4),
+    이메일   VARCHAR(50) UNIQUE,
+    학과코드 INT,
+    FOREIGN KEY (학과코드) REFERENCES 학과(학과코드) ON DELETE CASCADE
+);
+
+CREATE VIEW 컴공학생 AS
+SELECT 학번, 이름 FROM 학생 WHERE 학과코드 = 10;
+
+SELECT 이름 FROM 학생
+UNION
+SELECT 이름 FROM 교수;`,
+  table: {
+    head: ['연산 (A = 1, 2, 3 / B = 2, 3, 4)', '결과'],
+    rows: [
+      ['A UNION B', '1, 2, 3, 4 (중복 제거)'],
+      ['A UNION ALL B', '1, 2, 3, 2, 3, 4 (중복 포함)'],
+      ['A INTERSECT B', '2, 3'],
+      ['A EXCEPT B (MINUS)', '1'],
+    ],
+  },
+  points: [
+    '제약 조건: PRIMARY KEY, FOREIGN KEY … REFERENCES, UNIQUE, NOT NULL, CHECK, DEFAULT',
+    'ON DELETE CASCADE: 참조하는 부모 행이 지워지면 자식 행도 같이 삭제',
+    'ALTER TABLE 학생 ADD / MODIFY / DROP COLUMN 열이름',
+    '집합 연산은 두 SELECT의 열 개수와 자료형이 같아야 한다',
+  ],
+  tip: 'UNION은 중복 제거, UNION ALL만 중복을 남긴다',
+}
+
 const selectOrder: Concept = {
   title: 'SELECT 실행 순서',
   level: 3,
@@ -329,31 +436,102 @@ SELECT 이름 FROM 학생
 WHERE 학번 IN (SELECT 학번 FROM 수강);`,
 }
 
+/* ───────── 단답 키워드 (설명 → 이름) ───────── */
+
+const securityTerms: Concept = {
+  title: '보안 단답 키워드 모음',
+  level: 3,
+  summary: '실기는 설명을 보고 이름을 쓴다. 한글과 영문을 함께 외운다',
+  table: {
+    head: ['이런 설명이 나오면', '한글', '영문'],
+    rows: [
+      ['패킷을 몰래 엿봄', '스니핑', 'Sniffing'],
+      ['IP · MAC · DNS 등을 위조해 속임', '스푸핑', 'Spoofing'],
+      ['로그인된 세션을 가로챔', '세션 하이재킹', 'Session Hijacking'],
+      ['SYN만 대량 전송해 연결 대기 자원 고갈', 'SYN 플러딩', 'SYN Flooding'],
+      ['출발지를 피해자로 위조한 ICMP를 브로드캐스트', '스머핑', 'Smurfing'],
+      ['출발지 IP = 목적지 IP', '랜드 어택', 'LAND Attack'],
+      ['조각난 패킷의 offset 조작', '티어드롭', 'Teardrop'],
+      ['규정보다 큰 ICMP 패킷', '죽음의 핑', 'Ping of Death'],
+      ['웹 페이지에 악성 스크립트 삽입', '크로스 사이트 스크립팅', 'XSS'],
+      ['사용자 모르게 위조 요청을 보내게 함', '사이트 간 요청 위조', 'CSRF'],
+      ['입력값에 SQL 구문 삽입', 'SQL 삽입', 'SQL Injection'],
+      ['표적이 자주 가는 사이트를 감염', '워터링 홀', 'Watering Hole'],
+      ['특정 대상을 오랫동안 지속 공격', '지능형 지속 위협', 'APT'],
+      ['파일을 암호화하고 몸값 요구', '랜섬웨어', 'Ransomware'],
+      ['DNS를 조작해 가짜 사이트로', '파밍', 'Pharming'],
+      ['문자 메시지로 속임', '스미싱', 'Smishing'],
+      ['QR 코드로 속임', '큐싱', 'Qshing'],
+      ['패치 전 취약점 공격', '제로데이 공격', 'Zero-Day Attack'],
+      ['관리자 권한 획득 + 흔적 숨김', '루트킷', 'Rootkit'],
+      ['인증을 우회하는 비밀 통로', '백도어', 'Backdoor'],
+      ['남의 PC로 암호화폐 채굴', '크립토재킹', 'Cryptojacking'],
+      ['공격자를 유인하는 가짜 시스템', '허니팟', 'Honeypot'],
+      ['내부 정보 유출 방지', '데이터 유출 방지', 'DLP'],
+      ['여러 보안 장비 로그를 통합 분석', '보안 정보 이벤트 관리', 'SIEM'],
+      ['허가된 단말만 네트워크 접속', '네트워크 접근 제어', 'NAC'],
+      ['한 번 로그인으로 여러 서비스', '통합 인증', 'SSO'],
+      ['비밀번호 없이 권한만 위임', '-', 'OAuth'],
+    ],
+  },
+  tip: '영문 약어는 철자까지 정확히. 문제에 "영문 약어로"가 있으면 약어로 쓴다',
+}
+
+const networkTerms: Concept = {
+  title: '네트워크 단답 키워드 모음',
+  level: 2,
+  summary: '프로토콜 · 네트워크 형태 이름을 설명과 짝지어 외운다',
+  table: {
+    head: ['이런 설명이 나오면', '이름'],
+    rows: [
+      ['IP 주소 → MAC 주소', 'ARP'],
+      ['MAC 주소 → IP 주소', 'RARP'],
+      ['오류 · 제어 메시지 전달 (ping)', 'ICMP'],
+      ['멀티캐스트 그룹 가입 · 탈퇴 관리', 'IGMP'],
+      ['네트워크 장비를 원격으로 감시 · 관리', 'SNMP'],
+      ['IP 주소를 자동으로 할당', 'DHCP'],
+      ['도메인 이름 ↔ IP 주소', 'DNS'],
+      ['원격 사용자 인증 · 권한 · 계정 관리 서버 프로토콜', 'RADIUS'],
+      ['물리적 위치와 상관없이 논리적으로 LAN을 나눔', 'VLAN'],
+      ['기지국 없이 단말끼리 임시로 구성하는 네트워크', '애드혹 네트워크 (Ad-hoc)'],
+      ['블루투스로 연결된 소규모 네트워크 (마스터 1 + 슬레이브 최대 7)', '피코넷 (Piconet)'],
+      ['노드끼리 그물처럼 직접 연결, 대규모 디바이스용', '메시 네트워크 (Mesh)'],
+      ['거리 벡터 라우팅, 최대 홉 15', 'RIP'],
+      ['링크 상태 라우팅, 대규모 네트워크', 'OSPF'],
+      ['서로 다른 AS(자율 시스템) 사이 라우팅', 'BGP'],
+      ['사설 IP ↔ 공인 IP 변환', 'NAT'],
+      ['네트워크 계층 보안 (AH · ESP)', 'IPsec'],
+      ['전송 계층 보안, HTTPS의 기반', 'SSL / TLS'],
+    ],
+  },
+  tip: 'A(Address) R(Resolution) P(Protocol): 주소를 풀어 준다',
+}
+
 // 출제 우선순위 순서
 export const practicalSubjects: Subject[] = [
   {
     id: 'programming',
     name: '프로그래밍 (C · Java · Python)',
-    concepts: [howToTrace, loopControl, pointers, recursion, cTraps, cBitString, javaInheritance, javaTraps, pythonList, pythonMore, pythonTraps, w.operators],
+    concepts: [howToTrace, loopControl, pointers, recursion, cTraps, cBitString, cStruct, javaInheritance, javaTraps, javaAbstract, pythonList, pythonMore, pythonTraps, w.operators, w.libraries],
   },
-  { id: 'sql', name: 'SQL', concepts: [sqlSkeleton, selectOrder, sqlConditions, sqlJoin, w.sqlBasics] },
+  { id: 'sql', name: 'SQL', concepts: [sqlSkeleton, selectOrder, sqlConditions, sqlJoin, sqlDDL, w.sqlBasics, w.dbObjects] },
   {
     id: 'security',
     name: '보안 공격 · 암호',
-    concepts: [w.malwareAttacks, w.networkAttacks, w.crypto, w.accessControl, w.securitySolutions, w.devSecurity],
+    concepts: [securityTerms, w.malwareAttacks, w.malwareTypes, w.networkAttacks, w.crypto, w.accessControl, w.securityModels, w.securitySolutions, w.devSecurity],
   },
   {
     id: 'db-theory',
     name: 'DB 이론',
-    concepts: [w.normalization, w.keys, w.integrity, w.relationalTerms, w.relationalAlgebra, w.transaction, w.recovery],
+    concepts: [w.normalization, w.keys, w.integrity, w.relationalTerms, w.relationalAlgebra, w.transaction, w.recovery, w.erd],
   },
-  { id: 'test', name: '테스트', concepts: [w.testTechniques, w.testLevels, w.testOracle, w.testTypes] },
-  { id: 'design', name: '디자인 패턴 · 모듈 설계', concepts: [w.designPatterns, w.coupling, w.oop, w.architecture] },
+  { id: 'test', name: '테스트', concepts: [w.testTechniques, w.testCoverage, w.testLevels, w.testOracle, w.testTypes, w.qualityStandards] },
+  { id: 'design', name: '디자인 패턴 · 모듈 설계', concepts: [w.designPatterns, w.coupling, w.oop, w.architecture, w.ooAnalysis] },
   {
     id: 'os-network',
     name: 'OS · 네트워크 계산',
-    concepts: [w.scheduling, w.pageReplacement, w.processState, w.unix, w.subnetting, w.osi],
+    concepts: [w.scheduling, w.pageReplacement, w.processState, w.memory, w.concurrency, w.diskScheduling, w.unix, w.subnetting, w.osi, networkTerms],
   },
-  { id: 'uml', name: 'UML · 요구사항', concepts: [w.uml, w.requirements, w.lifecycle, w.agile] },
-  { id: 'new-tech', name: '신기술 용어', concepts: [w.newTech] },
+  { id: 'uml', name: 'UML · 요구사항', concepts: [w.uml, w.requirements, w.lifecycle, w.agile, w.analysisTools] },
+  { id: 'new-tech', name: '신기술 용어', concepts: [w.newTech, w.cloud] },
 ]

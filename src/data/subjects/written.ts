@@ -57,6 +57,7 @@ export const requirements: Concept = {
     '개발 순서: 도출 → 분석 → 명세 → 확인(검증)',
     '검증 방법: 동료 검토, 워크스루, 인스펙션',
     '워크스루: 명세서를 미리 나눠 주고 짧게 검토 회의 / 인스펙션: 작성자 외 전문가가 결함을 공식적으로 검사',
+    '명세 기법: 정형(수학 기호로 엄밀하게 — Z, VDM, Petri-Net) / 비정형(자연어 · 다이어그램 — FSM, Decision Table, ER)',
   ],
   tip: '속도 · 보안 · 안정성처럼 품질을 말하면 비기능 요구사항',
 }
@@ -69,6 +70,8 @@ export const analysisTools: Concept = {
     'DFD(자료 흐름도): 데이터가 어디서 어디로 흐르는지 그린 그림',
     'DFD 구성: 프로세스(원), 자료 흐름(화살표), 자료 저장소(평행선), 단말(사각형)',
     'HIPO: 위에서 아래로 쪼개 가며 설계하는 하향식 도구 (가시적 · 총체적 · 세부적 도표)',
+    'CASE: 개발 과정을 자동화하는 도구 — 상위(요구 분석 · 설계), 하위(코드 작성 · 테스트), 통합(전 과정)',
+    '요구사항 분석 CASE 도구: SADT(구조적 분석 · 설계), SREM(RSL · REVS 사용), PSL/PSA, TAGS',
   ],
   table: {
     head: ['자료 사전 기호', '의미'],
@@ -109,6 +112,8 @@ export const uiDesign: Concept = {
     'CLI: 명령어 입력 / GUI: 그래픽 / NUI: 말 · 몸짓 / OUI: 사물 표면이 입출력 장치',
     'UI 4원칙: 직관성(쉽게 이해), 유효성(목적 달성), 학습성(쉽게 배움), 유연성(요구 수용)',
     'UI는 접점(화면), UX는 사용자가 느끼는 전체 경험',
+    'HCI: 사람과 컴퓨터가 상호작용하는 방식을 연구해 사용하기 편한 시스템을 만드는 학문',
+    'UI 설계 도구: 와이어프레임(화면 뼈대), 스토리보드(화면 흐름 + 설명), 프로토타입(동작하는 견본), 목업(실제와 비슷한 정적 화면)',
   ],
   tip: "UI 원칙은 '직유학유'",
 }
@@ -203,6 +208,52 @@ export const interfaceDesign: Concept = {
   ],
 }
 
+export const ooAnalysis: Concept = {
+  title: '객체지향 분석 방법론',
+  level: 2,
+  summary: '누가 만든 방법론인지와 핵심 키워드를 짝지어 외운다',
+  table: {
+    head: ['방법론', '핵심'],
+    rows: [
+      ['럼바우 (OMT)', '객체 모델링(객체 다이어그램) → 동적 모델링(상태 다이어그램) → 기능 모델링(DFD)'],
+      ['부치 (Booch)', '미시적 · 거시적 개발 프로세스를 모두 사용'],
+      ['야콥슨 (Jacobson)', '유스케이스를 강조'],
+      ['코드-요든 (Coad-Yourdon)', 'E-R 다이어그램으로 객체의 행위를 모델링'],
+      ['워프스-브록 (Wirfs-Brock)', '분석과 설계를 구분하지 않고, 고객 명세서를 평가해 설계 작업까지 연속 수행'],
+    ],
+  },
+  tip: "유스케이스 = 야콥슨, E-R = 코드-요든, '객동기' = 럼바우",
+}
+
+export const codeDesign: Concept = {
+  title: '코드 설계',
+  level: 2,
+  summary: '데이터를 구별하기 쉽게 번호 · 기호를 붙이는 규칙',
+  points: [
+    '코드의 기능: 식별, 분류, 배열, 간소화, 표준화, 연상, 암호화, 오류 검출',
+  ],
+  table: {
+    head: ['코드 종류', '방법', '예'],
+    rows: [
+      ['순차', '발생 순서대로 일련번호', '1, 2, 3 …'],
+      ['블록', '공통 성질끼리 블록으로 묶고 블록 안에서 일련번호', '1001~1100 총무부'],
+      ['10진', '0~9로 10진 분할 (도서 분류)', '000 총류, 100 철학'],
+      ['그룹 분류', '대 · 중 · 소 분류 후 일련번호', '1-01-001'],
+      ['연상', '이름을 떠올릴 수 있는 문자 · 숫자', 'TV-40 (40인치 TV)'],
+      ['표의 숫자', '길이 · 무게 같은 실제 수치를 그대로', '120-720-1500 (두께 · 폭 · 길이)'],
+      ['합성', '두 가지 이상의 코드를 조합', '항공편 KE-123'],
+    ],
+  },
+  code: `코드 오류 (원래 코드 12536)
+필사(사본) 오류: 12936   한 자리를 잘못 씀
+전위 오류:       12356   좌우 두 자리가 바뀜
+이중 전위 오류:  21563   전위 오류가 두 군데 이상
+생략 오류:       1253    한 자리를 빠뜨림
+추가 오류:       125366  한 자리를 더 씀
+임의 오류:       두 가지 이상 오류가 섞임`,
+  tip: '표의 숫자 = 물리적 수치, 연상 = 이름이 떠오름',
+}
+
 /* ───────── 2과목 · 소프트웨어 개발 ───────── */
 
 export const dataStructures: Concept = {
@@ -255,6 +306,28 @@ export const treeTraversal: Concept = {
   tip: '전 · 중 · 후는 Root의 위치. 왼쪽은 항상 오른쪽보다 먼저',
 }
 
+export const treeGraph: Concept = {
+  title: '트리 · 그래프 용어',
+  level: 2,
+  summary: '노드와 간선으로 이루어진 구조의 개수 세기 공식',
+  points: [
+    '노드의 차수: 그 노드의 자식 수 / 트리의 차수: 노드 차수 중 가장 큰 값',
+    '단말 노드(리프): 자식이 없는 노드',
+    '이진 트리: 레벨 k의 최대 노드 수 2ᵏ⁻¹, 깊이 k인 트리의 최대 노드 수 2ᵏ − 1',
+    '그래프 최대 간선 수: 무방향 n(n − 1) / 2, 방향 n(n − 1)',
+    '신장 트리: 모든 정점을 사이클 없이 연결한 트리, 간선 수 = 정점 수 − 1',
+    '최소 비용 신장 트리: 크루스칼(가장 싼 간선부터 추가), 프림(한 정점에서 가장 싼 간선으로 확장)',
+  ],
+  code: `      A
+     / \\
+    B   C          노드 수: 5
+   / \\             A의 차수 2, B의 차수 2 → 트리의 차수 2
+  D   E            단말 노드: D, E, C (3개)
+
+정점 5개인 무방향 완전 그래프의 간선 수 = 5 × 4 / 2 = 10`,
+  tip: '무방향은 방향의 절반. 신장 트리 간선은 n − 1',
+}
+
 export const notation: Concept = {
   title: '수식 표기법 변환',
   level: 2,
@@ -289,6 +362,26 @@ export const sorting: Concept = {
 선택: [1, 3, 8, 5]  ← 최솟값 1을 맨 앞으로
 버블: [3, 5, 1, 8]  ← 가장 큰 8이 맨 뒤로`,
   tip: '느린 3형제(삽입 · 선택 · 버블)는 O(n²)',
+}
+
+export const searching: Concept = {
+  title: '탐색 · 해싱',
+  level: 2,
+  summary: '원하는 값을 빨리 찾는 방법. 이진 탐색은 반드시 정렬된 상태에서',
+  points: [
+    '선형 탐색: 처음부터 하나씩 비교 O(n) / 이진 탐색: 가운데와 비교해 절반씩 버림 O(log n)',
+    '해싱: 키를 해시 함수로 계산해 저장 위치(주소)를 바로 구함',
+    '해시 함수: 제산법(나머지), 제곱법, 폴딩법(쪼개서 더함), 기수 변환법, 숫자 분석법, 무작위법',
+    '충돌: 다른 키가 같은 주소로 가는 것 → 체이닝(연결 리스트), 개방 주소법(선형 · 이차 조사, 이중 해싱)',
+    '시노님(Synonym): 같은 주소를 갖는 키들 / 버킷: 같은 주소를 공유하는 저장 공간 / 오버플로: 버킷이 꽉 참',
+  ],
+  code: `이진 탐색: [3, 8, 15, 21, 34, 47, 52] 에서 34 찾기 (인덱스 0~6)
+1회: mid = (0 + 6) / 2 = 3 → 21 < 34 → 오른쪽 (low = 4)
+2회: mid = (4 + 6) / 2 = 5 → 47 > 34 → 왼쪽  (high = 4)
+3회: mid = (4 + 4) / 2 = 4 → 34 발견  → 비교 3회
+
+제산법: 키 27, 테이블 크기 7 → 27 % 7 = 6번 주소`,
+  tip: '이진 탐색 조건은 "정렬". 해싱 충돌 해결은 체이닝 vs 개방 주소',
 }
 
 export const integration: Concept = {
@@ -333,6 +426,30 @@ export const testTechniques: Concept = {
     '커버리지: 문장 → 분기 → 조건 → 분기/조건 순으로 촘촘해짐',
   ],
   tip: '화이트 = 속이 보이는 투명 상자, 블랙 = 속이 안 보이는 검은 상자',
+}
+
+export const testCoverage: Concept = {
+  title: '테스트 커버리지',
+  level: 2,
+  summary: '코드를 얼마나 빠짐없이 실행해 봤는지 재는 기준',
+  table: {
+    head: ['커버리지', '만족 조건'],
+    rows: [
+      ['구문 (문장)', '모든 문장을 최소 한 번 실행'],
+      ['결정 (분기)', '각 결정문(if 전체)이 참 · 거짓을 한 번씩'],
+      ['조건', '결정문 안의 개별 조건이 각각 참 · 거짓을 한 번씩'],
+      ['결정/조건', '결정과 조건 커버리지를 모두 만족'],
+      ['변경 조건/결정 (MC/DC)', '각 개별 조건이 다른 조건과 상관없이 결과에 독립적으로 영향을 주는지'],
+      ['다중 조건', '개별 조건의 모든 참 · 거짓 조합'],
+    ],
+  },
+  code: `if (A > 0 && B > 0) { ... }
+
+조건 커버리지:  (A 참, B 거짓), (A 거짓, B 참)  → 결과는 둘 다 거짓
+결정 커버리지:  (A 참, B 참) → 참, (A 거짓, B 거짓) → 거짓
+다중 조건:      참참 · 참거 · 거참 · 거거 4가지 모두`,
+  points: ['블랙박스 기법 추가: 상태 전이 테스트(상태 변화를 따라감), 페어와이즈(두 요소씩 조합), 분류 트리'],
+  tip: '조건은 "개별 조건", 결정은 "if 전체 결과"',
 }
 
 export const testLevels: Concept = {
@@ -408,13 +525,42 @@ export const codeQuality: Concept = {
 V(G) = 9 − 7 + 2 = 4`,
 }
 
+export const qualityStandards: Concept = {
+  title: '소프트웨어 품질 표준 (ISO/IEC)',
+  level: 3,
+  summary: '제품 품질을 어떤 특성으로 평가할지 정한 국제 표준',
+  table: {
+    head: ['표준', '내용'],
+    rows: [
+      ['ISO/IEC 9126', '품질 특성 6가지: 기능성, 신뢰성, 사용성, 효율성, 유지보수성, 이식성'],
+      ['ISO/IEC 25010', '9126을 개정한 8가지: 기능 적합성, 성능 효율성, 호환성, 사용성, 신뢰성, 보안성, 유지보수성, 이식성'],
+      ['ISO/IEC 14598', '제품 평가 절차 (반복성, 재현성, 공정성, 객관성)'],
+      ['ISO/IEC 12119', '패키지 SW 품질 요구사항과 테스트'],
+      ['ISO/IEC 25000 (SQuaRE)', '9126 + 14598 + 12119를 통합한 품질 평가 표준'],
+      ['ISO/IEC 12207', 'SW 생명주기 프로세스 (기본 · 지원 · 조직 생명주기)'],
+      ['ISO/IEC 15504 (SPICE)', 'SW 프로세스 평가 · 개선'],
+    ],
+  },
+  points: [
+    '신뢰성: 오류 없이 정해진 기능을 수행 (성숙성, 결함 허용성, 회복성)',
+    '사용성: 쉽게 이해 · 학습 · 사용 (이해성, 학습성, 운용성)',
+    '효율성: 적은 자원으로 빠르게 (시간 효율성, 자원 효율성)',
+    '유지보수성: 쉽게 고침 (분석성, 변경성, 안정성, 시험성)',
+    '이식성: 다른 환경에서도 동작 (적응성, 설치성, 대체성, 공존성)',
+  ],
+  tip: "9126 6특성은 '기신사효유이' (기능 · 신뢰 · 사용 · 효율 · 유지보수 · 이식)",
+}
+
 export const packaging: Concept = {
   title: '패키징 · 형상 관리',
   level: 2,
   summary: '완성된 SW를 배포하고 변경 이력을 관리',
   points: [
     '형상 관리 절차: 식별 → 통제 → 감사 → 기록',
-    '버전 관리: 공유 폴더 / 클라이언트-서버(SVN) / 분산 저장소(Git)',
+    '형상 통제: 변경 요청을 검토 · 승인해 기준선(베이스라인)에 반영 — 형상 통제 위원회(CCB)가 승인',
+    '형상 감사: 변경이 제대로 이루어졌는지 검증 / 형상 기록: 변경 내용을 기록 · 보고',
+    '버전 관리: 공유 폴더 / 클라이언트-서버(CVS, SVN) / 분산 저장소(Git)',
+    '버전 관리 용어: 체크아웃(가져오기), 커밋(반영), 체크인, 동기화, 저장소(Repository)',
     '빌드 자동화: Ant, Maven, Jenkins, Gradle',
     'DRM 구성: 콘텐츠 제공자, 분배자, 패키저, 보안 컨테이너, DRM 컨트롤러, 클리어링 하우스',
     '릴리즈 노트: 헤더, 개요, 목적, 이슈 요약, 재현 항목, 수정/개선 내용, 영향도, 노트, 면책 조항, 연락처',
@@ -440,6 +586,31 @@ export const dbDesign: Concept = {
   },
   points: ['스키마 3계층: 외부(사용자 관점) · 개념(전체 논리 구조) · 내부(물리 저장)'],
   tip: '개념 → 논리 → 물리 = 머릿속 그림 → 표 → 디스크',
+}
+
+export const erd: Concept = {
+  title: 'E-R 다이어그램 · 데이터 모델',
+  level: 2,
+  summary: '개체(사물)와 관계를 도형으로 그린 개념적 설계도',
+  table: {
+    head: ['기호', '의미'],
+    rows: [
+      ['사각형', '개체 (Entity)'],
+      ['이중 사각형', '약한 개체 (다른 개체에 의존)'],
+      ['마름모', '관계 (Relationship)'],
+      ['타원', '속성 (Attribute)'],
+      ['밑줄 친 타원', '기본키 속성'],
+      ['이중 타원', '다중값 속성 (값이 여러 개)'],
+      ['점선 타원', '유도 속성 (다른 속성에서 계산, 예: 나이)'],
+      ['선', '개체와 속성 · 관계를 연결'],
+    ],
+  },
+  points: [
+    '관계 유형: 1:1, 1:N, N:M',
+    '데이터 모델 구성 3요소: 구조(Structure), 연산(Operation), 제약 조건(Constraint)',
+    '논리 데이터 모델: 관계형(표), 계층형(트리, 부모-자식), 네트워크형(그래프, CODASYL)',
+  ],
+  tip: '네모 = 개체, 마름모 = 관계, 동그라미 = 속성',
 }
 
 export const relationalTerms: Concept = {
@@ -501,7 +672,11 @@ export const relationalAlgebra: Concept = {
       ['÷', 'Division', '나누기'],
     ],
   },
-  points: ['일반 집합 연산: 합집합(∪), 교집합(∩), 차집합(−), 교차곱(×)'],
+  points: [
+    '일반 집합 연산: 합집합(∪), 교집합(∩), 차집합(−), 교차곱(×)',
+    '관계대수는 "어떻게" 구할지 순서를 적는 절차적 언어 / 관계해석은 "무엇을" 원하는지만 적는 비절차적 언어 (코드가 제안)',
+    '관계해석 기호: ∀(전칭 정량자, 모든 것) · ∃(존재 정량자, 어떤 것)',
+  ],
   tip: 'σ(시그마)는 가로(행) 자르기, π(파이)는 세로(열) 자르기',
 }
 
@@ -557,6 +732,33 @@ export const physicalDesign: Concept = {
   ],
 }
 
+export const dbObjects: Concept = {
+  title: '시스템 카탈로그 · 트리거 · 프로시저',
+  level: 2,
+  summary: 'DB가 스스로 관리하는 정보와, 저장해 두고 쓰는 SQL 묶음',
+  table: {
+    head: ['객체', '뜻'],
+    rows: [
+      ['시스템 카탈로그', 'DB 안의 모든 객체 정보를 담은 시스템 DB (= 데이터 사전). 메타데이터 저장'],
+      ['트리거', 'INSERT · UPDATE · DELETE 같은 이벤트가 생기면 자동으로 실행되는 SQL'],
+      ['저장 프로시저', '자주 쓰는 SQL을 묶어 이름을 붙여 저장. EXECUTE / CALL로 호출'],
+      ['사용자 정의 함수', '프로시저와 비슷하지만 RETURN으로 값 하나를 돌려줌'],
+      ['커서', '쿼리 결과를 한 행씩 처리하는 포인터 (OPEN → FETCH → CLOSE)'],
+    ],
+  },
+  points: [
+    '카탈로그는 DBMS가 자동으로 갱신한다. 사용자는 SELECT로 조회만 가능 (직접 INSERT · UPDATE · DELETE 불가)',
+    '트리거 안에서는 COMMIT, ROLLBACK 같은 트랜잭션 제어문을 쓸 수 없다',
+  ],
+  code: `CREATE TRIGGER 입학_로그
+AFTER INSERT ON 학생
+FOR EACH ROW
+BEGIN
+    INSERT INTO 로그 VALUES (NEW.학번, '입학');
+END;`,
+  tip: '카탈로그는 "DB에 대한 DB", 트리거는 "자동 실행"',
+}
+
 export const sqlBasics: Concept = {
   title: 'SQL 분류와 기본',
   level: 3,
@@ -572,6 +774,9 @@ export const sqlBasics: Concept = {
   points: [
     '실행 순서: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY',
     'DROP ... CASCADE: 연결된 것까지 삭제 / RESTRICT: 참조 중이면 거부',
+    'COMMIT · ROLLBACK · SAVEPOINT는 TCL(트랜잭션 제어어)로 따로 나누기도 한다',
+    '집합 연산: UNION(합집합, 중복 제거) · UNION ALL(중복 포함) · INTERSECT(교집합) · EXCEPT / MINUS(차집합)',
+    'DELETE(행 삭제, 롤백 가능) vs TRUNCATE(전체 행 삭제, 구조는 남김) vs DROP(테이블 자체 삭제)',
   ],
   tip: 'WHERE는 묶기 전의 행을, HAVING은 묶은 뒤의 그룹을 거른다',
 }
@@ -586,6 +791,8 @@ export const recovery: Concept = {
     '그 외 회복 기법: 검사점, 그림자 페이지',
     '로킹 단위가 크면 병행성↓ 관리 쉬움 / 작으면 병행성↑ 오버헤드↑',
     '병행 제어 기법: 로킹, 타임스탬프 순서, 낙관적 검증, 다중 버전',
+    '2단계 로킹(2PL): 확장 단계(잠금만 가능) → 축소 단계(해제만 가능). 직렬성은 보장하지만 교착상태는 생길 수 있음',
+    '병행 제어를 안 하면: 갱신 분실, 모순성, 연쇄 복귀(Cascading Rollback)',
   ],
   tip: '로킹 단위 = 자물쇠 크기. 큰 자물쇠 하나면 관리는 쉽지만 모두가 기다린다',
 }
@@ -628,6 +835,31 @@ export const javaBasics: Concept = {
   ],
 }
 
+export const libraries: Concept = {
+  title: '언어 분류 · 표준 라이브러리',
+  level: 2,
+  summary: '어떤 언어가 어떤 부류인지, 자주 쓰는 함수가 어느 헤더 · 패키지에 있는지',
+  table: {
+    head: ['언어', '라이브러리', '들어 있는 것'],
+    rows: [
+      ['C', 'stdio.h', '입출력: printf, scanf, fopen'],
+      ['C', 'stdlib.h', '메모리 · 변환 · 난수: malloc, free, atoi, rand, exit'],
+      ['C', 'string.h', '문자열: strlen, strcpy, strcmp, strcat'],
+      ['C', 'math.h / time.h', '수학: sqrt, pow, abs / 시간: time, clock'],
+      ['Java', 'java.lang', 'import 없이 자동 사용: String, Math, System, 래퍼 클래스'],
+      ['Java', 'java.util / java.io', '자료구조 · 날짜: ArrayList, HashMap, Scanner / 입출력'],
+      ['Python', 'math, random, datetime, os', '수학, 난수, 날짜, 운영체제 기능'],
+    ],
+  },
+  points: [
+    '절차적: C, 포트란, 코볼, 알골 / 객체지향: Java, C++, C#, 스몰토크',
+    '스크립트(번역 없이 바로 실행): Python, JavaScript, PHP, 쉘 스크립트',
+    '선언형(무엇을 할지만 기술): 함수형(LISP, 하스켈), 논리형(프롤로그), SQL',
+    '컴파일러: 전체를 한 번에 번역 후 실행 (C, Java) / 인터프리터: 한 줄씩 번역하며 실행 (Python)',
+  ],
+  tip: 'strlen · strcpy는 string.h, malloc은 stdlib.h',
+}
+
 export const memory: Concept = {
   title: '기억장치 관리',
   level: 2,
@@ -638,6 +870,9 @@ export const memory: Concept = {
     '최악 적합: 남는 공간이 가장 큰 곳',
     '스래싱: 페이지 교체만 하느라 정작 일을 못 하는 상태',
     '구역성: 최근 쓴 것(시간) · 근처의 것(공간)을 또 쓰는 경향 / 워킹 셋: 자주 쓰는 페이지 모음',
+    '페이징: 같은 크기(페이지)로 나눔 → 내부 단편화 발생 / 세그먼테이션: 논리 단위(크기 제각각)로 나눔 → 외부 단편화 발생',
+    '내부 단편화: 할당된 칸 안에 남는 공간 / 외부 단편화: 칸 사이에 남는, 너무 작아 못 쓰는 공간',
+    '단편화 해결: 통합(인접한 빈 공간 합치기), 압축(빈 공간을 한쪽으로 모으기 = 쓰레기 수집)',
   ],
   code: `빈 공간: 20KB, 12KB, 35KB / 배치할 프로그램: 11KB
 
@@ -712,6 +947,46 @@ export const deadlock: Concept = {
   tip: '4가지 조건 중 하나만 깨도 교착상태는 생기지 않는다',
 }
 
+export const concurrency: Concept = {
+  title: '스레드 · 상호 배제',
+  level: 2,
+  summary: '여러 작업이 같은 자원을 쓸 때 한 번에 하나만 들어가게 막기',
+  points: [
+    '스레드: 프로세스 안의 실행 단위. 같은 프로세스의 자원(메모리)을 공유하는 경량 프로세스',
+    '임계 구역: 공유 자원을 쓰는 코드 구간. 한 번에 하나의 프로세스만 들어가야 함',
+    '상호 배제 기법 — 세마포어: 정수 S와 P(대기, S−1) · V(신호, S+1) 연산 (다익스트라 제안)',
+    '모니터: 공유 자원과 연산을 묶어 한 번에 하나만 진입하게 한 구조 / 뮤텍스: 잠금을 가진 하나만 진입',
+    '소프트웨어적 해결: 데커, 피터슨, 램포트의 빵집 알고리즘',
+    'PCB(프로세스 제어 블록): 프로세스 ID, 상태, 레지스터, 우선순위 등 프로세스 정보를 저장',
+    '문맥 교환(Context Switching): CPU를 다른 프로세스에 넘길 때 PCB를 저장 · 복원',
+  ],
+  tip: 'P = 들어가며 줄이기(Wait), V = 나오며 늘리기(Signal)',
+}
+
+export const diskScheduling: Concept = {
+  title: '디스크 스케줄링',
+  level: 2,
+  summary: '디스크 헤드를 어느 순서로 움직여 요청을 처리할지',
+  table: {
+    head: ['기법', '방식'],
+    rows: [
+      ['FCFS', '요청이 온 순서대로'],
+      ['SSTF', '현재 위치에서 가장 가까운 요청 먼저'],
+      ['SCAN', '한 방향으로 끝까지 가며 처리 후 반대로 (엘리베이터)'],
+      ['C-SCAN', '한 방향으로만 처리하고, 끝에 닿으면 처음으로 돌아가 다시'],
+      ['LOOK', 'SCAN처럼 가되 끝이 아닌 마지막 요청까지만'],
+    ],
+  },
+  code: `헤드 위치 53, 요청: 98 183 37 122 14 124 65 67
+
+SSTF: 53 → 65 → 67 → 37 → 14 → 98 → 122 → 124 → 183
+이동: 12 + 2 + 30 + 23 + 84 + 24 + 2 + 59 = 236
+
+FCFS: 53 → 98 → 183 → 37 → 122 → 14 → 124 → 65 → 67
+이동: 45 + 85 + 146 + 85 + 108 + 110 + 59 + 2 = 640`,
+  tip: 'SSTF는 매번 "가장 가까운 것", 이동 거리는 차이의 절댓값 합',
+}
+
 export const unix: Concept = {
   title: 'UNIX / Linux',
   level: 2,
@@ -749,6 +1024,9 @@ export const osi: Concept = {
     'TCP: 연결형, 신뢰성 보장 / UDP: 비연결형, 빠르지만 보장 X',
     'ARP: IP → MAC / RARP: MAC → IP / ICMP: 오류 알림 (ping)',
     'IPv4 32비트 / IPv6 128비트 (유니캐스트, 멀티캐스트, 애니캐스트)',
+    'IPv4 → IPv6 전환: 듀얼 스택(둘 다 사용), 터널링(IPv6를 IPv4로 감싸 전송), 헤더 변환',
+    'TCP 3-way handshake: SYN → SYN + ACK → ACK / 흐름 제어: 슬라이딩 윈도우',
+    'IP 클래스: A(0~127), B(128~191), C(192~223), D(멀티캐스트), E(실험용)',
     '라우팅: RIP(거리 벡터), OSPF(링크 상태), BGP(외부)',
     'NAT: 사설 IP ↔ 공인 IP 변환 / 프로토콜 3요소: 구문, 의미, 시간',
     '주요 포트: FTP 21, SSH 22, Telnet 23, SMTP 25, DNS 53, HTTP 80, HTTPS 443',
@@ -820,6 +1098,9 @@ export const scheduleQuality: Concept = {
   summary: '프로젝트 일정과 개발 조직의 성숙도를 관리',
   points: [
     'CPM(임계 경로): 가장 긴 경로 = 프로젝트의 최소 완료 기간',
+    'PERT: 작업 시간이 불확실할 때 낙관 · 보통 · 비관 3점 추정 → (낙관 + 4 × 보통 + 비관) / 6',
+    '간트 차트: 작업별 시작 · 종료를 가로 막대로 표시 (작업 사이의 선후 관계는 잘 안 보임)',
+    '브룩스의 법칙: 지연된 프로젝트에 인력을 더 넣으면 오히려 더 늦어진다',
     'CMMI 5단계: 초기 → 관리 → 정의 → 정량적 관리 → 최적화',
     'SPICE: 프로세스 평가 국제 표준 (ISO/IEC 15504)',
     '프레임워크: 스프링, 전자정부 프레임워크, 닷넷 — 모듈화, 재사용성, 확장성, 제어의 역전(IoC)',
@@ -932,9 +1213,62 @@ export const malwareAttacks: Concept = {
       ['APT', '특정 대상을 오랫동안 끈질기게 공격'],
       ['XSS', '웹 페이지에 악성 스크립트 삽입'],
       ['SQL 삽입', '입력값에 SQL 구문을 넣어 DB 조작'],
+      ['CSRF', '로그인한 사용자가 모르게 공격자가 의도한 요청을 보내게 함 (사이트 간 요청 위조)'],
+      ['레이스 컨디션', '검사 시점과 사용 시점의 차이를 노려 자원을 바꿔치기'],
     ],
   },
   tip: '실기 단답 최다 출제 — 설명을 보고 영문 이름을 쓸 수 있게',
+}
+
+export const malwareTypes: Concept = {
+  title: '악성코드 종류 · 피싱 계열',
+  level: 3,
+  summary: '스스로 퍼지는지, 무엇으로 위장하는지, 어떤 경로로 속이는지로 구분',
+  table: {
+    head: ['이름', '핵심'],
+    rows: [
+      ['바이러스', '다른 파일에 기생해 감염. 혼자서는 퍼지지 못함'],
+      ['웜', '스스로 복제해 네트워크로 퍼짐'],
+      ['트로이 목마', '정상 프로그램으로 위장. 자기 복제는 안 함'],
+      ['루트킷', '관리자 권한을 얻고 침입 흔적을 숨기는 도구 모음'],
+      ['봇넷', '감염된 좀비 PC들의 네트워크 (DDoS에 사용)'],
+      ['크립토재킹', '남의 컴퓨터로 몰래 암호화폐 채굴'],
+      ['드라이브 바이 다운로드', '사이트 방문만으로 악성코드가 설치됨'],
+      ['제로데이 공격', '보안 패치가 나오기 전의 취약점을 공격'],
+      ['피싱', '가짜 메일 · 사이트로 개인정보를 낚음'],
+      ['스피어 피싱', '특정 대상에게 맞춤 제작한 피싱 메일'],
+      ['스미싱', '문자(SMS)로 링크를 보내 속임'],
+      ['파밍', 'DNS · hosts를 조작해 진짜 주소를 입력해도 가짜 사이트로 이동'],
+      ['큐싱', 'QR 코드로 가짜 사이트 유도'],
+    ],
+  },
+  points: [
+    '블루투스 공격: 블루버그(장치 원격 제어), 블루스나프(파일 · 정보 탈취), 블루재킹(스팸 메시지), 블루프린팅(장치 탐색)',
+    '허니팟: 공격자를 유인하려고 일부러 허술하게 만든 가짜 시스템',
+  ],
+  tip: '스스로 퍼지면 웜, 기생하면 바이러스, 위장하면 트로이 목마',
+}
+
+export const securityModels: Concept = {
+  title: '보안 모델 · 인증 관리',
+  level: 2,
+  summary: '읽기 · 쓰기 규칙을 정한 모델과, 사용자를 확인하는 체계',
+  table: {
+    head: ['모델', '지키는 것', '규칙'],
+    rows: [
+      ['벨-라파듈라', '기밀성', 'No Read Up (위 등급 읽기 금지), No Write Down (아래 등급 쓰기 금지)'],
+      ['비바', '무결성', 'No Read Down, No Write Up'],
+      ['클락-윌슨', '무결성', '허가된 프로그램으로만 데이터 변경 (상업용)'],
+      ['만리장성 (브루어-내시)', '이해 충돌 방지', '경쟁 회사 정보에 동시에 접근 금지'],
+    ],
+  },
+  points: [
+    'AAA: 인증(Authentication, 누구인가) · 인가(Authorization, 무엇을 할 수 있나) · 계정 관리(Accounting, 무엇을 했나)',
+    'SSO: 한 번 로그인으로 여러 시스템을 사용 / 커버로스(Kerberos): 티켓 기반 인증',
+    '솔트(Salt): 비밀번호에 임의 값을 붙여 해시 → 레인보우 테이블 공격 방어',
+    '무차별 대입: 가능한 모든 조합 시도 / 사전 공격: 자주 쓰는 단어 목록으로 시도',
+  ],
+  tip: '벨라파듈라는 비밀 지키기(읽기 위로 X), 비바는 반대로 무결성',
 }
 
 export const newTech: Concept = {
@@ -947,33 +1281,56 @@ export const newTech: Concept = {
     'DB: 빅데이터, 하둡, 맵리듀스, 데이터 마이닝, NoSQL, OLAP, 다크 데이터(모아만 두고 안 쓰는 데이터)',
     '네트워크: IoT, M2M, 메시 네트워크, SDN, NFC, Wi-SUN',
     '저장 장치: DAS(직접 연결), NAS(네트워크 연결), SAN(전용 고속망)',
+    'IoT 프로토콜: MQTT(발행-구독 방식의 경량 메시지), CoAP / 저전력 무선: 지그비(Zigbee), BLE',
+    'SPOF(단일 장애점): 한 곳이 고장 나면 전체가 멈추는 지점 → 이중화로 HA(고가용성) 확보',
+    'AI: 머신러닝, 딥러닝, 텐서플로 / 메타버스, 증강 현실(AR), 가상 현실(VR)',
   ],
+}
+
+export const cloud: Concept = {
+  title: '클라우드 · 가상화',
+  level: 2,
+  summary: '어디까지 빌려 쓰느냐에 따라 IaaS · PaaS · SaaS',
+  table: {
+    head: ['모델', '제공하는 것', '예'],
+    rows: [
+      ['IaaS', '서버 · 저장소 · 네트워크 같은 인프라', 'AWS EC2'],
+      ['PaaS', '인프라 + 개발 · 실행 플랫폼', 'Heroku, Google App Engine'],
+      ['SaaS', '완성된 소프트웨어', 'Gmail, 구글 드라이브'],
+    ],
+  },
+  points: [
+    '배포 모델: 퍼블릭, 프라이빗, 하이브리드',
+    '가상화: 물리 자원 하나를 여러 개처럼 쓰는 기술 / 하이퍼바이저: 가상 머신을 만들고 관리하는 소프트웨어',
+    '컨테이너(도커): OS 전체가 아닌 앱 실행 환경만 격리해 가볍다 / 쿠버네티스: 컨테이너 운영 자동화',
+  ],
+  tip: 'I(인프라) → P(플랫폼) → S(소프트웨어) 순으로 제공 범위가 넓어진다',
 }
 
 export const writtenSubjects: Subject[] = [
   {
     id: 'design',
     name: '소프트웨어 설계',
-    concepts: [lifecycle, agile, requirements, analysisTools, uml, uiDesign, architecture, oop, coupling, designPatterns, interfaceDesign],
+    concepts: [lifecycle, agile, requirements, analysisTools, uml, uiDesign, architecture, oop, ooAnalysis, coupling, designPatterns, interfaceDesign, codeDesign],
   },
   {
     id: 'development',
     name: '소프트웨어 개발',
-    concepts: [dataStructures, treeTraversal, notation, sorting, integration, interfaceImpl, testTechniques, testLevels, testOracle, testTypes, codeQuality, packaging],
+    concepts: [dataStructures, treeTraversal, treeGraph, notation, sorting, searching, integration, interfaceImpl, testTechniques, testCoverage, testLevels, testOracle, testTypes, codeQuality, qualityStandards, packaging],
   },
   {
     id: 'database',
     name: '데이터베이스 구축',
-    concepts: [dbDesign, relationalTerms, keys, integrity, relationalAlgebra, normalization, transaction, physicalDesign, sqlBasics, recovery],
+    concepts: [dbDesign, erd, relationalTerms, keys, integrity, relationalAlgebra, normalization, transaction, physicalDesign, dbObjects, sqlBasics, recovery],
   },
   {
     id: 'programming',
     name: '프로그래밍 언어 활용',
-    concepts: [operators, javaBasics, memory, pageReplacement, processState, scheduling, deadlock, unix, osi, subnetting],
+    concepts: [operators, javaBasics, libraries, memory, pageReplacement, processState, scheduling, deadlock, concurrency, diskScheduling, unix, osi, subnetting],
   },
   {
     id: 'management',
     name: '정보시스템 구축 관리',
-    concepts: [costEstimation, methodology, scheduleQuality, devSecurity, crypto, accessControl, securitySolutions, networkAttacks, malwareAttacks, newTech],
+    concepts: [costEstimation, methodology, scheduleQuality, devSecurity, crypto, accessControl, securityModels, securitySolutions, networkAttacks, malwareAttacks, malwareTypes, newTech, cloud],
   },
 ]
