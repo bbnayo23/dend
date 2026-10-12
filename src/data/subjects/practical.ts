@@ -9,6 +9,7 @@ const howToTrace: Concept = {
   title: '코드 문제 푸는 순서',
   level: 3,
   summary: '눈으로 읽지 말고, 변수 값을 표에 적으며 따라간다',
+  analogy: '요리 레시피를 따라 할 때 재료 양을 하나씩 메모하듯, 코드도 한 줄 실행할 때마다 변수 값을 표에 적어요. 머릿속으로만 계산하면 꼭 한 군데서 틀려요.',
   points: [
     '1. 함정 찾기: 후위 증가, 정수 나눗셈, 오버라이딩처럼 결과를 바꾸는 부분에 표시',
     '2. 변수 추적표 만들기: 한 줄 실행할 때마다 변수 값을 적는다',
@@ -22,6 +23,7 @@ const loopControl: Concept = {
   title: '반복문과 continue / break',
   level: 3,
   summary: 'continue는 이번 회차만 건너뛰고, break는 반복문을 빠져나간다',
+  analogy: "계단 오르기 놀이예요. continue는 '이 계단은 건너뛰고 다음 계단으로!', break는 '놀이 끝, 계단에서 내려와!'예요.",
   code: `int i, sum = 0;
 for (i = 1; i <= 10; i++) {
     if (i % 3 == 0) continue;   // 3의 배수는 건너뜀
@@ -49,6 +51,7 @@ const pointers: Concept = {
   title: 'C 포인터와 배열',
   level: 3,
   summary: '*p는 가리키는 곳의 값, p+1은 다음 칸의 주소',
+  analogy: "변수는 사물함, 값은 사물함 속 물건, 주소는 사물함 번호예요. 포인터는 '사물함 번호를 적은 쪽지'이고, *p는 쪽지에 적힌 사물함을 열어 물건을 꺼내는 거예요. p + 1은 바로 옆 사물함 번호예요.",
   points: [
     '&a: a의 주소 / *p: p가 가리키는 값',
     '배열 이름 a는 a[0]의 주소 → a[i] == *(a + i)',
@@ -74,6 +77,7 @@ const recursion: Concept = {
   title: '재귀 함수',
   level: 2,
   summary: '자기 자신을 부르는 함수. 내려가면서 적고, 올라오면서 계산',
+  analogy: '러시아 인형(마트료시카)을 여는 것과 같아요. 인형을 열면 더 작은 인형이 나오고, 가장 작은 인형(종료 조건)이 나오면 멈춰요. 그다음 거꾸로 하나씩 닫으면서 답을 합쳐요.',
   code: `int f(int n) {
     if (n <= 1) return 1;
     return n + f(n - 1);
@@ -92,6 +96,7 @@ const cTraps: Concept = {
   title: 'C언어 함정 체크리스트',
   level: 3,
   summary: '결과를 바꾸는 C 문법 포인트',
+  analogy: "a++는 '먼저 쓰고 나중에 하나 올리기', ++a는 '먼저 올리고 쓰기'예요. switch에서 break가 없으면 미끄럼틀처럼 아래 case까지 쭉 미끄러져 내려가요.",
   points: [
     'a++: 쓰고 나서 증가 / ++a: 증가하고 나서 사용',
     '정수끼리 나눗셈은 소수점 버림: 7 / 2 = 3',
@@ -115,6 +120,7 @@ const cBitString: Concept = {
   title: 'C 비트 연산 · 문자열 · 2차원 배열',
   level: 2,
   summary: '2진수로 바꿔 한 자리씩 계산하고, 문자열은 끝의 \\0까지 생각한다',
+  analogy: "비트는 전등 스위치 여러 개예요. &는 두 스위치가 모두 켜져야 불이 켜지고, |는 하나만 켜져도 켜지고, ^는 서로 다를 때만 켜져요. 문자열 끝의 \\0은 '여기서 끝'이라는 마침표예요.",
   code: `int a = 6, b = 3;   // 110, 011
 a & b    // 010 = 2   (둘 다 1일 때만 1)
 a | b    // 111 = 7   (하나라도 1이면 1)
@@ -136,6 +142,7 @@ const cStruct: Concept = {
   title: 'C 구조체',
   level: 2,
   summary: '여러 자료형을 하나로 묶은 사용자 정의 타입. 변수는 점(.), 포인터는 화살표(->)',
+  analogy: '학생 카드 한 장에 이름·국어·영어 점수를 함께 적는 거예요. 카드를 손에 들고 있으면 점(.)으로 바로 보고, 카드가 있는 위치(포인터)만 알면 화살표(->)로 찾아가서 봐요.',
   points: [
     's.name: 구조체 변수의 멤버 / p->name: 구조체 포인터의 멤버 (= (*p).name)',
     'typedef struct { … } Student; → 이후 struct 없이 Student로 선언',
@@ -172,6 +179,7 @@ const javaInheritance: Concept = {
   title: 'Java 상속: 메소드 vs 필드',
   level: 3,
   summary: '메소드는 실제 객체(new 뒤)를, 필드는 선언 타입(앞)을 따른다',
+  analogy: '리모컨(선언 타입)과 TV(실제 객체)예요. 버튼을 누르면 실제 TV가 움직이듯 메소드는 new 뒤의 진짜 객체를 따라가요. 하지만 리모컨에 붙은 이름표(필드)는 리모컨 종류를 따라가요.',
   code: `class A {
     int x = 1;
     void show() { System.out.print("A" + x); }
@@ -198,6 +206,7 @@ const javaTraps: Concept = {
   title: 'Java 함정 체크리스트',
   level: 2,
   summary: '실기 Java 문제에 단골로 나오는 포인트',
+  analogy: "오버로딩은 같은 이름의 요리를 재료만 바꿔 여러 개 만드는 것, 오버라이딩은 엄마 레시피를 내 방식으로 고쳐 쓰는 거예요. ==는 '같은 집 주소야?', equals는 '안에 든 내용이 같아?'를 묻는 거예요.",
   points: [
     '오버로딩: 이름 같고 매개변수 다름 / 오버라이딩: 부모 메소드를 자식이 재정의',
     '생성자는 부모 것이 먼저 실행된다 (super())',
@@ -217,6 +226,7 @@ const javaAbstract: Concept = {
   title: 'Java 추상 클래스 · 인터페이스 · static',
   level: 2,
   summary: '추상 메소드는 자식이 반드시 구현하고, static 변수는 모든 객체가 하나를 나눠 쓴다',
+  analogy: "추상 클래스는 '동물은 소리를 낸다'처럼 할 일만 정해 두고 방법은 비워 둔 숙제지예요. 자식이 빈칸을 채워야 해요. static 변수는 교실 칠판처럼 반 전체가 하나를 같이 보는 거라 한 명이 고치면 모두에게 바뀌어 보여요.",
   points: [
     'abstract 클래스: 몸체 없는 추상 메소드를 가질 수 있고, new로 직접 만들 수 없음 → extends로 상속',
     'interface: 모든 메소드가 기본적으로 추상 (public abstract). implements로 구현, 여러 개 구현 가능',
@@ -251,6 +261,7 @@ const pythonList: Concept = {
   title: 'Python 슬라이싱과 리스트',
   level: 3,
   summary: '끝 인덱스는 포함하지 않는다. append는 통째로, extend는 풀어서',
+  analogy: "기차 칸 떼어 내기예요. a[1:4]는 1번 칸부터 4번 칸 '앞'까지 떼어 내요. 4번 칸은 안 가져와요. append는 상자를 통째로 한 칸에 싣고, extend는 상자를 풀어서 물건을 한 칸씩 실어요.",
   code: `a = [1, 2, 3, 4, 5]
 print(a[1:4])     # ①
 print(a[::-2])    # ②
@@ -274,6 +285,7 @@ const pythonTraps: Concept = {
   title: 'Python 함정 체크리스트',
   level: 2,
   summary: '실기 Python 문제에 단골로 나오는 포인트',
+  analogy: "range(1, 5)는 1층에서 5층 '앞'까지, 즉 4층까지만 가는 엘리베이터예요. //는 몫, %는 나머지예요. 사탕 7개를 2명이 나누면 한 명당 3개(몫)이고 1개가 남아요(나머지).",
   points: [
     'range(시작, 끝, 간격): 끝은 포함하지 않음 → range(1, 5) = 1, 2, 3, 4',
     '// 몫, % 나머지, ** 거듭제곱 → 7 // 2 = 3, 2 ** 3 = 8',
@@ -291,6 +303,7 @@ const pythonMore: Concept = {
   title: 'Python 문자열 · 딕셔너리 · 컴프리헨션',
   level: 2,
   summary: '한 줄로 리스트를 만들고, 딕셔너리로 개수를 센다',
+  analogy: "딕셔너리는 이름표가 붙은 서랍장이에요. d.get('a', 0)은 'a 서랍을 열되, 없으면 0이라고 해 줘'라는 뜻이에요. 컴프리헨션은 '0부터 4까지 중 짝수만 두 배로'를 한 줄 주문서로 쓰는 거예요.",
   code: `s = "Hello"
 s[1:4]          # 'ell'   (1부터 4 직전까지)
 s[-2:]          # 'lo'    (뒤에서 두 글자)
@@ -317,6 +330,7 @@ const sqlSkeleton: Concept = {
   title: 'SQL 문법 뼈대',
   level: 3,
   summary: '빈칸 채우기 문제는 대부분 이 뼈대에서 나온다',
+  analogy: "DB에 보내는 문장 틀이에요. GRANT는 친구에게 게임기를 빌려주는 것(TO 친구), REVOKE는 돌려받는 것(FROM 친구)이에요. UPDATE는 SET으로 '이렇게 바꿔', INSERT는 VALUES로 '이 값을 넣어'라고 말해요.",
   code: `-- 테이블 · 인덱스
 CREATE INDEX idx_name ON 학생(이름);
 ALTER TABLE 학생 ADD 전화번호 VARCHAR(20);
@@ -337,6 +351,7 @@ const sqlDDL: Concept = {
   title: 'CREATE TABLE · VIEW · 집합 연산',
   level: 2,
   summary: '제약 조건이 붙은 테이블 만들기와, 두 쿼리 결과 합치기',
+  analogy: "CREATE TABLE은 새 공책 첫 장에 규칙을 적는 거예요. '학년은 1~4만(CHECK)', '이름은 꼭 쓰기(NOT NULL)'처럼요. UNION은 두 반 명단을 합치며 겹치는 이름을 한 번만 적는 것, INTERSECT는 두 반에 모두 있는 이름만 적는 거예요.",
   code: `CREATE TABLE 학생 (
     학번     INT PRIMARY KEY,
     이름     VARCHAR(20) NOT NULL,
@@ -374,6 +389,7 @@ const selectOrder: Concept = {
   title: 'SELECT 실행 순서',
   level: 3,
   summary: '쓰는 순서와 실행되는 순서가 다르다',
+  analogy: '도서관에서 책 고르기예요. 먼저 서가로 가서(FROM), 원하는 책만 뽑고(WHERE), 분야별로 묶고(GROUP BY), 3권 이상인 묶음만 남기고(HAVING), 제목만 적고(SELECT), 가나다순으로 정리해요(ORDER BY). 쓰는 순서와 하는 순서가 달라요.',
   code: `SELECT 학과, COUNT(*) AS 인원
 FROM 학생
 WHERE 학년 >= 2
@@ -398,6 +414,7 @@ const sqlConditions: Concept = {
   title: '조건과 그룹 함수',
   level: 3,
   summary: '원하는 행만 골라내는 조건 문법',
+  analogy: "%는 몇 글자든 괜찮은 조커 카드, _는 딱 한 글자짜리 조커 카드예요. 그래서 LIKE '김%'는 '김으로 시작하는 이름 다 나와!'예요. COUNT(*)는 빈자리까지 센 반 인원, COUNT(점수)는 점수를 낸 사람만 센 거예요.",
   table: {
     head: ['조건', '뜻'],
     rows: [
@@ -421,6 +438,7 @@ const sqlJoin: Concept = {
   title: '조인과 하위 질의',
   level: 2,
   summary: '두 테이블을 연결하거나, 쿼리 안에 쿼리를 넣기',
+  analogy: "조인은 학생 명단과 동아리 명단을 학번으로 이어 붙이는 거예요. INNER는 양쪽 명단에 다 있는 사람만, LEFT OUTER는 왼쪽 명단은 전부 남기고 동아리가 없으면 빈칸으로 둬요. 하위 질의는 '이것부터 알아 와!' 하는 심부름 속 심부름이에요.",
   points: [
     'INNER JOIN: 양쪽 모두 일치하는 행만',
     'LEFT OUTER JOIN: 왼쪽은 전부 + 오른쪽은 일치하는 것만 (없으면 NULL)',
@@ -442,6 +460,7 @@ const securityTerms: Concept = {
   title: '보안 단답 키워드 모음',
   level: 3,
   summary: '실기는 설명을 보고 이름을 쓴다. 한글과 영문을 함께 외운다',
+  analogy: '단어 카드 게임이에요. 앞면(설명)을 보고 뒷면(이름)을 바로 말할 수 있을 때까지 반복해요. 영어 약어는 철자 하나만 틀려도 오답이니 소리 내어 읽으며 외워요.',
   table: {
     head: ['이런 설명이 나오면', '한글', '영문'],
     rows: [
@@ -481,6 +500,7 @@ const networkTerms: Concept = {
   title: '네트워크 단답 키워드 모음',
   level: 2,
   summary: '프로토콜 · 네트워크 형태 이름을 설명과 짝지어 외운다',
+  analogy: "ARP는 '이 전화번호(IP) 주인의 집 주소(MAC)가 어디야?'라고 동네에 외쳐 묻는 것, DHCP는 전학 온 학생에게 자리 번호를 자동으로 정해 주는 담임 선생님, DNS는 이름을 전화번호로 바꿔 주는 전화번호부예요.",
   table: {
     head: ['이런 설명이 나오면', '이름'],
     rows: [

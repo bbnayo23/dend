@@ -373,6 +373,26 @@ details[open] > :not(summary) { animation: fade 0.4s var(--ease) both; }
   background: var(--sheen), var(--violet-bg);
   box-shadow: var(--highlight);
   font-size: 13px;
+/* 비유: 개념을 펼치면 가장 먼저 보이는 쉬운 설명 */
+.analogy {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: var(--sheen), var(--peach-bg);
+  box-shadow: var(--highlight);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.analogy::before {
+  content: '비유로 이해하기';
+  display: block;
+  margin-bottom: 4px;
+  color: var(--peach-fg);
+  font-size: 11px;
+  font-weight: 800;
+}
+
   font-weight: 600;
 }
 .tip::before { content: 'TIP'; margin-right: 6px; color: var(--violet-fg); font-size: 11px; font-weight: 800; }

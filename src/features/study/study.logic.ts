@@ -13,4 +13,4 @@ export function filterConcepts(concepts: Concept[], query: string) {
 
 // 검색 대상: 카드에 보이는 모든 글자
 const conceptText = (c: Concept) =>
-  [c.title, c.summary, ...(c.points ?? []), c.code ?? '', c.tip ?? '', ...(c.table?.head ?? []), ...(c.table?.rows.flat() ?? [])].join('\n')
+  [c.title, c.summary, c.analogy ?? '', ...(c.points ?? []), c.code ?? '', c.tip ?? '', ...(c.table?.head ?? []), ...(c.table?.rows.flat() ?? [])].join('\n')

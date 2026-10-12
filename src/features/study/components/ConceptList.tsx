@@ -35,6 +35,7 @@ function ConceptCard({ concept: c }: { concept: Concept }) {
       </summary>
       <div className="concept-body">
         {c.points && (
+        {c.analogy && <p className="analogy">{c.analogy}</p>}
           <ul className="points">
             {c.points.map((p) => <li key={p}>{p}</li>)}
           </ul>

@@ -4,6 +4,7 @@ export type Concept = {
   title: string
   level?: 1 | 2 | 3 // 출제 빈도 ★
   summary: string // 접힌 상태에서 보이는 한 줄 쉬운 정의
+  analogy?: string // 펼치면 맨 위에 보이는 생활 속 비유 (아이도 이해할 수 있게)
   points?: string[]
   code?: string // 코드 · 계산 · 그림 예시
   table?: { head: string[]; rows: string[][] } // 비교표 · 변수 추적표
