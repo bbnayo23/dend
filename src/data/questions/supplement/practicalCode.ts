@@ -640,4 +640,112 @@ SELECT SUM(점수) FROM 학생 WHERE 학과 = '컴공';`,
     answer: ['173'],
     explanation: '85 → 90, 78 → 83, NULL + 5는 여전히 NULL. SUM은 NULL을 무시 → 90 + 83 = 173.',
   },
+  {
+    id: 'ap-s17', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '다음 SQL의 결과 행 수를 쓰시오.',
+    code: `${TABLES}
+
+SELECT * FROM 학생 CROSS JOIN 수강;`,
+    answer: ['25', '25개', '25행'],
+    explanation: 'CROSS JOIN(카티션 곱)은 모든 짝을 만든다 → 학생 5행 × 수강 5행 = 25행.',
+  },
+  {
+    id: 'ap-s18', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '다음 SQL의 결과 행 수를 쓰시오.',
+    code: `${TABLES}
+
+SELECT 이름 FROM 학생
+WHERE 점수 > ANY (SELECT 점수 FROM 학생 WHERE 학년 = 2);`,
+    answer: ['3', '3개', '3행'],
+    explanation: '하위 질의 결과는 92, 78. > ANY는 그중 하나보다라도 크면 참 = 최솟값 78보다 큼 → 김철수(85), 이영희(92), 최지은(88). 정우성은 NULL이라 탈락 → 3행.',
+  },
+  {
+    id: 'ap-s19', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '다음 SQL의 실행 결과를 쓰시오.',
+    code: `${TABLES}
+
+SELECT COUNT(*) FROM 학생
+WHERE 학과 = '컴공' OR 학과 = '전자' AND 학년 = 3;`,
+    answer: ['3'],
+    explanation: "AND가 OR보다 먼저 계산된다: 학과 = '컴공' OR (학과 = '전자' AND 학년 = 3). 컴공 3명 + 3학년 전자 0명 = 3.",
+  },
+  {
+    id: 'ap-s20', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '다음 SQL의 실행 결과(이름)를 쓰시오.',
+    code: `${TABLES}
+
+SELECT 이름 FROM 학생 WHERE 이름 LIKE '_영_';`,
+    answer: ['이영희'],
+    explanation: "_는 정확히 한 글자. '_영_'은 세 글자이고 두 번째 글자가 '영'인 이름 → 이영희.",
+  },
+  {
+    id: 'ap-s21', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '다음 SQL의 결과 행 수를 쓰시오.',
+    code: `${TABLES}
+
+SELECT 학과, SUM(점수) FROM 학생
+GROUP BY 학과
+HAVING SUM(점수) >= 90;`,
+    answer: ['2', '2개', '2행'],
+    explanation: '학과별 합계: 컴공 85 + 78 = 163 (NULL 제외), 전자 92, 경영 88. 90 이상인 그룹은 컴공, 전자 → 2행.',
+  },
+  {
+    id: 'ap-s22', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '다음 두 SQL을 순서대로 실행했을 때 두 번째 SQL의 결과를 쓰시오.',
+    code: `${TABLES}
+
+UPDATE 학생 SET 학년 = 학년 + 1 WHERE 학년 >= 3;
+SELECT COUNT(*) FROM 학생 WHERE 학년 = 4;`,
+    answer: ['2'],
+    explanation: '학년 3 이상인 김철수(3 → 4), 최지은(4 → 5), 정우성(3 → 4)이 1씩 오른다. 학년이 4인 학생은 김철수, 정우성 → 2.',
+  },
+  {
+    id: 'ap-s23', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '[학생] 테이블의 학과코드는 [학과] 테이블을 참조하는 외래키이며 ON DELETE SET NULL 옵션이 지정되어 있다. 다음 두 SQL을 순서대로 실행했을 때 두 번째 SQL의 결과를 쓰시오.',
+    code: `[학과]                 [학생]
+학과코드 | 학과명       학번 | 이름   | 학과코드
+10       | 컴공         1    | 김철수 | 10
+20       | 전자         2    | 이영희 | 20
+                        3    | 박민수 | 10
+
+DELETE FROM 학과 WHERE 학과코드 = 10;
+SELECT COUNT(학과코드) FROM 학생;`,
+    answer: ['1'],
+    explanation: 'SET NULL이므로 학과 10을 참조하던 김철수 · 박민수의 학과코드가 NULL이 된다(행은 남음). COUNT(열)은 NULL을 세지 않으므로 이영희 1명 → 1.',
+  },
+  {
+    id: 'ap-s24', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '김철수(학번 1)의 점수는 처음에 85이다. 다음 SQL을 순서대로 실행했을 때 마지막 SELECT의 결과를 쓰시오.',
+    code: `UPDATE 학생 SET 점수 = 90 WHERE 학번 = 1;
+COMMIT;
+UPDATE 학생 SET 점수 = 95 WHERE 학번 = 1;
+SAVEPOINT A;
+UPDATE 학생 SET 점수 = 100 WHERE 학번 = 1;
+ROLLBACK TO A;
+ROLLBACK;
+SELECT 점수 FROM 학생 WHERE 학번 = 1;`,
+    answer: ['90'],
+    explanation: 'ROLLBACK TO A로 95가 되지만, 이어지는 ROLLBACK은 마지막 COMMIT 시점으로 되돌린다 → 90.',
+  },
+  {
+    id: 'ap-s25', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '테이블의 구조는 그대로 남기고 모든 행을 한 번에 삭제하는 DDL 명령어를 쓰시오.',
+    answer: ['TRUNCATE', 'TRUNCATE TABLE'],
+    explanation: 'DELETE는 조건으로 행을 지우는 DML, TRUNCATE는 모든 행을 지우는 DDL(구조는 남음), DROP은 테이블 자체를 지우는 DDL이다.',
+  },
+  {
+    id: 'ap-s26', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: '[학생] 테이블에서 컴공 학생의 학번과 이름만 보여 주는 가상 테이블을 만들려고 한다. 빈칸 ①에 들어갈 키워드를 쓰시오.',
+    code: `CREATE ( ① ) 컴공학생 AS
+SELECT 학번, 이름 FROM 학생 WHERE 학과 = '컴공';`,
+    answer: ['VIEW'],
+    explanation: '뷰는 SELECT 문만 저장한 가상 테이블이다. 삭제는 DROP VIEW 컴공학생;',
+  },
+  {
+    id: 'ap-s27', exam: 'practical', subjectId: 'sql', source: SRC, type: 'short',
+    question: 'user1에게 [학생] 테이블의 SELECT 권한을 주면서, user1이 이 권한을 다른 사용자에게 다시 부여할 수 있도록 하려고 한다. 빈칸 ①에 들어갈 옵션을 쓰시오.',
+    code: `GRANT SELECT ON 학생 TO user1 ( ① );`,
+    answer: ['WITH GRANT OPTION'],
+    explanation: 'WITH GRANT OPTION을 붙이면 받은 권한을 남에게 다시 줄 수 있다. 회수할 때 REVOKE … CASCADE를 쓰면 user1이 남에게 준 권한까지 함께 회수된다.',
+  },
 ]

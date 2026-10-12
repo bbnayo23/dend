@@ -1,7 +1,10 @@
 import type { Question } from '../../../types'
 
-// 이상 현상 · 함수적 종속 · 반정규화 · 인터페이스 · 스텁/드라이버 · 정보보안 · VPN · 라우팅 실기 문제 (기출 원문 아님)
+// 이상 현상 · 함수적 종속 · 반정규화 · 인터페이스 · 스텁/드라이버 · 정보보안 · VPN · 라우팅 · 네트워크 실기 문제 (기출 원문 아님)
+// 'YYYY년 N회 기출 변형'은 회차별 기출 복원 자료에서 같은 주제의 출제를 확인한 문제만 붙인다
 const SRC = '빈출 변형'
+// 실기에 아직 나오지 않았지만 범위 안에 있는 주제 (기출이라고 표시하지 않는다)
+const EXP = '예상 문제'
 
 // 순서를 묻지 않는 답: 모든 순서를 정답으로 인정
 const anyOrder = (items: string[]): string[] =>
@@ -180,7 +183,7 @@ export const supplementPracticalTheory: Question[] = [
   {
     id: 'th-if11', exam: 'practical', subjectId: 'interface', source: '2022년 1회 기출 변형', type: 'short',
     question: 'xUnit 계열 테스트 프레임워크 중, Java 언어용 단위 테스트 프레임워크를 쓰시오.',
-    answer: ['JUnit', 'Junit', '제이유닛'],
+    answer: ['JUnit', '제이유닛'],
     explanation: 'xUnit 계열: Java → JUnit, C++ → CppUnit, .Net → NUnit. 인터페이스 구현 검증 도구로도 쓰인다.',
   },
   {
@@ -191,7 +194,7 @@ export const supplementPracticalTheory: Question[] = [
   },
   {
     id: 'th-if07', exam: 'practical', subjectId: 'interface', source: SRC, type: 'short',
-    question: '다음 (1) ~ (3)에 해당하는 인터페이스 구현 검증 도구를 보기에서 골라 순서대로 쓰시오. (예: NTAF, Selenium, watir)\n\n(1) Java, C++, .Net 등 다양한 언어를 지원하는 단위 테스트 프레임워크\n(2) 웹 기반으로 테스트 케이스의 설계, 실행, 결과 확인 등을 지원하는 테스트 프레임워크\n(3) 서비스 호출, 컴포넌트 재사용 등 다양한 환경을 지원하며, 분산 환경의 각 테스트 대상에 데몬을 두고 테스트하는 프레임워크\n\n[보기] xUnit, STAF, FitNesse, NTAF, Selenium, watir',
+    question: '다음 (1) ~ (3)에 해당하는 인터페이스 구현 검증 도구를 보기에서 골라 순서대로 쓰시오. (예: NTAF, Selenium, Watir)\n\n(1) Java, C++, .Net 등 다양한 언어를 지원하는 단위 테스트 프레임워크\n(2) 웹 기반으로 테스트 케이스의 설계, 실행, 결과 확인 등을 지원하는 테스트 프레임워크\n(3) 서비스 호출, 컴포넌트 재사용 등 다양한 환경을 지원하며, 분산 환경의 각 테스트 대상에 데몬을 두고 테스트하는 프레임워크\n\n[보기] xUnit, STAF, FitNesse, NTAF, Selenium, Watir',
     answer: ['xUnit, FitNesse, STAF'],
     explanation: 'NTAF는 NHN이 FitNesse와 STAF의 장점을 합친 도구, Selenium은 다양한 브라우저를 지원하는 웹 테스트 도구, watir는 Ruby 기반 웹 테스트 도구이다.',
   },
@@ -240,7 +243,7 @@ export const supplementPracticalTheory: Question[] = [
   },
   {
     id: 'th-ts04', exam: 'practical', subjectId: 'test', source: '2022년 1회 기출 변형', type: 'short',
-    question: 'V-모델에서 다음 (1) ~ (3)의 개발 단계와 짝을 이루어 검증하는 테스트 레벨을 순서대로 쓰시오. (예: 시스템, 단위, 통합)\n\n(1) 요구사항 분석\n(2) 설계\n(3) 구현(코딩)',
+    question: 'V-모델에서 다음 (1) ~ (3)의 개발 단계와 짝을 이루어 검증하는 테스트 레벨을 순서대로 쓰시오. (예: 시스템, 단위, 통합)\n\n(1) 요구사항 정의\n(2) 설계\n(3) 구현(코딩)',
     answer: ['인수, 통합, 단위', '인수 테스트, 통합 테스트, 단위 테스트'],
     explanation: 'V-모델: 요구사항 ↔ 인수 테스트, 분석 ↔ 시스템 테스트, 설계 ↔ 통합 테스트, 구현 ↔ 단위 테스트. 테스트는 단위 → 통합 → 시스템 → 인수 순서로 진행한다.',
   },
@@ -339,6 +342,117 @@ export const supplementPracticalTheory: Question[] = [
   D ------- E ------- F
        2         3`,
     answer: ['A → D → E → F', 'A-D-E-F', 'ADEF', 'A,D,E,F'],
-    explanation: 'A → D → E → F = 1 + 2 + 3 = 6. A → B → C → F = 2 + 3 + 2 = 7, A → B → E → F = 2 + 4 + 3 = 9 이므로 6이 가장 작다.',
+    explanation: 'A → D → E → F = 1 + 2 + 3 = 6. A → B → C → F = 2 + 3 + 2 = 7, A → B → E → F = 2 + 4 + 3 = 9 이므로 6이 가장 작다. (기출 원문은 RIP 기준이라 비용이 아닌 홉 수로 경로를 골랐다. 기준에 따라 답이 달라지니 문제의 기준을 먼저 확인한다)',
+  },
+  /* ───────── 네트워크: OSI · IP · 오류 제어 · 프로토콜 · URI ───────── */
+  {
+    id: 'th-nw01', exam: 'practical', subjectId: 'os-network', source: '2020년 1회 · 2021년 3회 기출 변형', type: 'short',
+    question: '다음 (1) ~ (3)에 해당하는 OSI 7계층의 이름을 순서대로 쓰시오. (예: 응용, 세션, 전송)\n\n(1) 0과 1의 비트를 전기 신호로 바꿔 전송 매체를 통해 전송한다.\n(2) 인접한 두 시스템 사이에서 프레임 단위로 데이터를 전송하며, 물리 계층에서 생길 수 있는 오류를 검출하고 흐름을 제어한다.\n(3) 서로 다른 데이터 표현 형식을 맞추기 위해 코드 변환, 암호화, 압축을 수행한다.',
+    answer: ['물리, 데이터 링크, 표현', '물리 계층, 데이터 링크 계층, 표현 계층', 'Physical, Data Link, Presentation'],
+    explanation: '비트 전송은 물리(1), 인접 장비 사이 프레임 전송과 오류 · 흐름 제어는 데이터 링크(2), 형식 변환 · 암호화 · 압축은 표현(6) 계층이다.',
+  },
+  {
+    id: 'th-nw02', exam: 'practical', subjectId: 'os-network', source: '2020년 4회 · 2021년 1회 기출 변형', type: 'short',
+    question: '다음 설명의 빈칸 ①, ②에 들어갈 숫자를 순서대로 쓰시오.\n\nIPv6는 IPv4의 주소 고갈 문제를 해결하기 위한 차세대 인터넷 프로토콜로, 주소 길이가 ( ① )비트이다. IPv4는 32비트 주소를 ( ② )비트씩 네 부분으로 나누어 10진수로 표기한다.',
+    answer: ['128, 8', '① 128, ② 8', '128비트, 8비트'],
+    explanation: 'IPv6는 128비트(16비트씩 8칸, 16진수), IPv4는 32비트(8비트씩 4칸, 10진수)이다.',
+  },
+  {
+    id: 'th-nw03', exam: 'practical', subjectId: 'os-network', source: EXP, type: 'short',
+    question: '다음 IPv6 주소를 규칙에 따라 가장 짧게 축약해 쓰시오.',
+    code: `2001:0db8:0000:0000:0000:0000:1428:57ab`,
+    answer: ['2001:db8::1428:57ab'],
+    explanation: '칸마다 앞쪽 0을 지우고(0db8 → db8, 0000 → 0), 연속된 0 칸 4개를 :: 로 한 번 줄인다.',
+  },
+  {
+    id: 'th-nw04', exam: 'practical', subjectId: 'os-network', source: '2022년 2회 · 2025년 2회 기출 변형', type: 'short',
+    question: 'IP 주소가 172.16.5.200이고 서브넷 마스크가 255.255.255.192일 때, (1) 이 호스트가 속한 네트워크 주소와 (2) 이 서브넷에서 호스트에 할당할 수 있는 주소의 수를 순서대로 쓰시오. (예: 10.0.0.0, 30)',
+    answer: ['172.16.5.192, 62'],
+    explanation: '마스크 .192 = /26 → 서브넷 크기 64 (0, 64, 128, 192로 시작). 200은 192 ~ 255 구간 → 네트워크 주소 172.16.5.192. 호스트 수 64 − 2 = 62.',
+  },
+  {
+    id: 'th-nw05', exam: 'practical', subjectId: 'os-network', source: '2022년 3회 기출 변형', type: 'short',
+    question: '192.168.1.0/24 네트워크를 FLSM(고정 길이 서브넷 마스크) 방식으로 3개의 서브넷으로 나누려고 한다. 서브넷 번호가 작은 순서로 할당할 때, 세 번째 서브넷의 브로드캐스트 주소를 쓰시오.',
+    answer: ['192.168.1.191'],
+    explanation: '3개가 필요하므로 호스트 비트 2개를 빌려 4개로 나눈다(/26, 크기 64). 서브넷: .0 ~ .63, .64 ~ .127, .128 ~ .191, .192 ~ .255 → 세 번째의 마지막 주소 192.168.1.191.',
+  },
+  {
+    id: 'th-nw06', exam: 'practical', subjectId: 'os-network', source: '2023년 2회 · 2025년 3회 기출 변형', type: 'short',
+    question: '다음은 데이터 링크 계층의 오류 제어에 대한 설명이다. (1) ~ (5)에 해당하는 용어를 보기에서 골라 순서대로 쓰시오. (예: NAK, MD5, BCD, CRC, FEC)\n\n(1) 벨 연구소에서 개발했으며, 1비트 오류를 검출해 스스로 정정할 수 있는 코드\n(2) 받는 쪽이 재전송 요청 없이 스스로 오류를 검출하고 정정하는 방식\n(3) 오류가 발생하면 송신 측에 재전송을 요청하는 방식\n(4) 데이터에 1비트를 추가해 1의 개수를 짝수 또는 홀수로 맞추는 오류 검출 방식\n(5) 다항식을 이용하며, 연속해서 생기는 집단 오류 검출에 강한 오류 검출 방식\n\n[보기] CRC, BEC, NAK, FEC, Parity, Hamming, MD5, BCD',
+    answer: ['Hamming, FEC, BEC, Parity, CRC', '해밍, FEC, BEC, 패리티, CRC', '해밍 코드, FEC, BEC, 패리티, CRC', 'Hamming Code, FEC, BEC, Parity, CRC'],
+    explanation: '스스로 고치면 FEC(전진 오류 수정, 대표가 해밍 코드), 다시 보내 달라고 하면 BEC(후진 오류 수정). 패리티는 1비트 추가, CRC는 다항식으로 집단 오류 검출.',
+  },
+  {
+    id: 'th-nw07', exam: 'practical', subjectId: 'os-network', source: '2025년 1회 기출 변형', type: 'short',
+    question: '송신 측이 생성 다항식으로 나눈 나머지를 데이터에 붙여 보내고, 수신 측이 같은 다항식으로 나누어 오류를 검출하는 방식으로, 연속된 비트에 생기는 집단 오류 검출에 강한 기법을 영문 약어로 쓰시오.',
+    answer: ['CRC', 'Cyclic Redundancy Check', '순환 중복 검사'],
+    explanation: 'CRC(순환 중복 검사)는 이더넷 프레임의 FCS 등에 쓰인다.',
+  },
+  {
+    id: 'th-nw08', exam: 'practical', subjectId: 'os-network', source: EXP, type: 'short',
+    question: '데이터 1011을 짝수 패리티 해밍 코드로 바꾸려고 한다. 1, 2, 4번 자리에 패리티 비트를, 3, 5, 6, 7번 자리에 데이터 비트를 차례로 넣을 때 전송되는 7비트를 쓰시오.',
+    answer: ['0110011'],
+    explanation: 'p1(1, 3, 5, 7번) = 1 + 0 + 1 → 0, p2(2, 3, 6, 7번) = 1 + 1 + 1 → 1, p4(4, 5, 6, 7번) = 0 + 1 + 1 → 0. 자리 순서대로 0 1 1 0 0 1 1.',
+  },
+  {
+    id: 'th-nw09', exam: 'practical', subjectId: 'os-network', source: '2023년 2회 기출 변형', type: 'short',
+    question: '다음은 HDLC에 대한 설명이다. (1) ~ (5)에 해당하는 이름을 보기에서 골라 순서대로 쓰시오. (예: 정규 응답, 정보, 감독, 비번호, 비동기 응답)\n\n(1) 사용자 데이터를 전달하는 프레임\n(2) 오류 제어와 흐름 제어를 위해 사용하는 프레임\n(3) 링크의 설정과 해제 등 링크 관리에 사용하는 프레임\n(4) 모든 국이 대등한 혼합국으로, 상대의 허락 없이 언제든 전송할 수 있는 동작 모드\n(5) 종국이 주국의 허락 없이 전송할 수 있지만, 링크 설정과 오류 복구 등은 주국만 하는 동작 모드\n\n[보기] 정보, 감독, 비번호, 정규 응답, 비동기 응답, 비동기 균형',
+    answer: ['정보, 감독, 비번호, 비동기 균형, 비동기 응답', '정보 프레임, 감독 프레임, 비번호 프레임, 비동기 균형 모드, 비동기 응답 모드', 'I, S, U, ABM, ARM'],
+    explanation: '프레임은 정보(I) · 감독(S) · 비번호(U). 모두 대등하면 비동기 균형 모드(ABM), 종국이 허락 없이 보내되 주국이 관리하면 비동기 응답 모드(ARM), 허락을 받아야 하면 정규 응답 모드(NRM).',
+  },
+  {
+    id: 'th-nw10', exam: 'practical', subjectId: 'os-network', source: '2021년 2회 · 2023년 1회 · 2024년 2회 기출 변형', type: 'short',
+    question: '다음 (1), (2)에 해당하는 패킷 교환 방식을 순서대로 쓰시오. (예: 회선 교환, 메시지 교환)\n\n(1) 데이터를 보내기 전에 송신지와 수신지 사이에 논리적인 경로를 먼저 설정하고, 모든 패킷이 그 경로를 따라 보낸 순서대로 전달되는 연결형 방식\n(2) 연결 설정 없이 패킷마다 독립적으로 경로를 선택해 전달하므로, 도착 순서가 보낸 순서와 다를 수 있는 비연결형 방식',
+    answer: ['가상 회선, 데이터그램', '가상 회선 방식, 데이터그램 방식', 'Virtual Circuit, Datagram'],
+    explanation: '길을 먼저 정하고 순서대로 가면 가상 회선, 패킷마다 따로 길을 고르면 데이터그램.',
+  },
+  {
+    id: 'th-nw11', exam: 'practical', subjectId: 'os-network', source: '2024년 3회 기출 변형', type: 'short',
+    question: '다음 URI의 각 부분에 번호를 붙였다. (1) ~ (5)의 설명에 해당하는 부분의 번호를 순서대로 쓰시오. (예: ①, ②, ③, ④, ⑤)\n\n(1) # 뒤에 오며, 문서 안의 특정 위치를 가리킨다.\n(2) 서버 안에서 자원의 위치를 나타내며, / 로 계층을 구분한다.\n(3) 자원에 접근하는 방법(프로토콜)을 나타낸다.\n(4) ? 뒤에 오며, 이름=값 쌍을 & 로 연결해 서버에 추가 정보를 전달한다.\n(5) 서버의 호스트 이름과 포트 번호로 이루어진다.',
+    code: `https://www.example.com:8080/board/view?id=10&page=2#comment
+
+① https
+② www.example.com:8080
+③ /board/view
+④ id=10&page=2
+⑤ comment`,
+    answer: ['⑤, ③, ①, ④, ②', '5, 3, 1, 4, 2', '5-3-1-4-2', '53142', '⑤③①④②'],
+    explanation: '① scheme, ② authority(host:port), ③ path, ④ query, ⑤ fragment. 설명 순서대로 fragment → path → scheme → query → authority.',
+  },
+  {
+    id: 'th-nw12', exam: 'practical', subjectId: 'os-network', source: '2022년 2회 기출 변형', type: 'short',
+    question: '다음 (1) ~ (3)에 해당하는 용어를 순서대로 쓰시오. (예: FTP, Hyperlink, XML)\n\n(1) WWW에서 HTML 문서를 주고받는 데 쓰는 프로토콜로, GET · POST 같은 메소드로 요청한다.\n(2) 문서 안의 특정 단어나 그림을 누르면 다른 문서로 이동할 수 있도록 연결 정보를 담은 텍스트\n(3) 웹 문서를 만들기 위한 표준 마크업 언어',
+    answer: ['HTTP, Hypertext, HTML', 'HTTP, 하이퍼텍스트, HTML'],
+    explanation: 'HTTP = HyperText Transfer Protocol, HTML = HyperText Markup Language. 둘 다 하이퍼텍스트를 다룬다.',
+  },
+  {
+    id: 'th-nw13', exam: 'practical', subjectId: 'os-network', source: '2023년 1회 · 2025년 2회 기출 변형', type: 'short',
+    question: '암호화되지 않는 Telnet을 대신해 원격 로그인, 명령 실행, 파일 복사를 암호화해 안전하게 처리하며, 기본 포트로 22번을 사용하고 공개키 기반 인증도 지원하는 프로토콜을 쓰시오.',
+    answer: ['SSH', 'Secure Shell'],
+    explanation: 'SSH는 22번 포트, Telnet은 23번 포트를 쓴다.',
+  },
+  {
+    id: 'th-nw14', exam: 'practical', subjectId: 'os-network', source: EXP, type: 'short',
+    question: 'TCP의 3-way handshake 연결 설정 과정에서 (1) 클라이언트가 처음 보내는 패킷, (2) 서버가 응답으로 보내는 패킷, (3) 클라이언트가 마지막으로 보내는 패킷의 플래그를 순서대로 쓰시오. (예: FIN, ACK, RST)',
+    answer: ['SYN, SYN+ACK, ACK', 'SYN, SYN-ACK, ACK', 'SYN, SYN/ACK, ACK', 'SYN, SYN ACK, ACK'],
+    explanation: 'SYN(연결 요청) → SYN + ACK(요청 수락 + 확인) → ACK(확인). 연결 해제는 FIN → ACK → FIN → ACK의 4-way handshake.',
+  },
+  {
+    id: 'th-nw15', exam: 'practical', subjectId: 'os-network', source: EXP, type: 'short',
+    question: '송신 측이 0 ~ 5번 프레임을 연속으로 보냈는데 2번 프레임에서 오류가 발생했다. 2번 프레임부터 그 뒤에 보낸 3, 4, 5번 프레임까지 모두 다시 보내는 ARQ 방식을 쓰시오.',
+    answer: ['Go-Back-N', 'Go-Back-N ARQ', 'Go Back N', 'GBN'],
+    explanation: 'Go-Back-N은 오류 난 프레임부터 전부 재전송, 선택적 재전송(Selective Repeat)은 오류 난 2번만 재전송한다.',
+  },
+  {
+    id: 'th-nw16', exam: 'practical', subjectId: 'os-network', source: EXP, type: 'short',
+    question: '다음 프로토콜의 기본 포트 번호를 순서대로 쓰시오. (예: 21, 23, 80)\n\n(1) SMTP\n(2) DNS\n(3) HTTPS',
+    answer: ['25, 53, 443'],
+    explanation: 'SMTP 25(메일 전송), DNS 53(이름 ↔ IP), HTTPS 443(HTTP + SSL/TLS).',
+  },
+  {
+    id: 'th-se09', exam: 'practical', subjectId: 'security', source: '2025년 3회 기출 변형', type: 'short',
+    question: '로그인할 때마다 새로 만들어지고 한 번 사용하면 다시 쓸 수 없는 일회용 비밀번호를 영문 약어 3글자로 쓰시오.',
+    answer: ['OTP', 'One-Time Password', 'One Time Password', '일회용 비밀번호'],
+    explanation: 'OTP는 소유 기반 인증 수단으로, 시간 동기화 · 이벤트 동기화 · 질의-응답 방식이 있다.',
   },
 ]

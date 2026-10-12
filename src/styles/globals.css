@@ -359,6 +359,7 @@ details[open] > :not(summary) { animation: fade 0.4s var(--ease) both; }
 .concept-title { display: flex; align-items: center; gap: 6px; }
 .stars { color: var(--star); font-size: 10px; letter-spacing: 1px; }
 .concept-body { display: flex; flex-direction: column; gap: 12px; }
+.concept-section { display: flex; flex-direction: column; gap: 10px; }
 
 .table-wrap {
   overflow-x: auto;

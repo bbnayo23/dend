@@ -425,7 +425,7 @@ export const interfaceImpl: Concept = {
     'JSON: "이름": 값 쌍으로 된 가벼운 데이터 형식',
     'AJAX: 페이지 전체가 아니라 필요한 부분만 비동기로 갱신',
     '보안 적용: 네트워크 영역(IPsec, SSL/TLS, S-HTTP) · 애플리케이션 영역 · DB 영역',
-    '검증 도구: xUnit, STAF, FitNesse, NTAF, Selenium, watir',
+    '검증 도구: xUnit, STAF, FitNesse, NTAF, Selenium, Watir',
   ],
   code: `{ "name": "홍길동", "age": 20 }`,
 }
@@ -544,7 +544,7 @@ export const codeQuality: Concept = {
   analogy: "깔끔한 공책 정리와 같아요. 남이 봐도 읽기 쉽고, 같은 내용을 두 번 쓰지 않고, 한 쪽에는 한 주제만 써요. 맥케이브 복잡도는 코드 속 '갈림길'이 몇 개인지 세는 숫자라서, 클수록 미로처럼 복잡하다는 뜻이에요.",
   points: [
     '클린 코드: 가독성, 단순성, 의존성 배제, 중복성 최소화, 추상화',
-    '정적 분석(실행하지 않고 검사): pmd, cppcheck, checkstyle, SonarQube',
+    '정적 분석(실행하지 않고 검사): PMD, Cppcheck, Checkstyle, SonarQube',
     '동적 분석(실행하며 검사): Avalanche, Valgrind',
     '맥케이브 순환 복잡도: V(G) = E − N + 2 (E: 간선 수, N: 노드 수)',
   ],
