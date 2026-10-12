@@ -1,10 +1,12 @@
 import { useState, type ReactNode } from 'react'
-import type { Concept } from '../../../types'
+import type { Concept, Section } from '../../../types'
 import { filterConcepts } from '../study.logic'
 
-export function ConceptList({ concepts }: { concepts: Concept[] }) {
+export function ConceptList({ concepts, sections }: { concepts: Concept[]; sections?: Section[] }) {
   const [query, setQuery] = useState('')
   const shown = filterConcepts(concepts, query)
+  // 검색 중이 아닐 때만 묶음 제목을 붙인다
+  const groups = sections && !query.trim() ? sections : [{ title: '', concepts: shown }]
 
   return (
     <>
@@ -16,9 +18,14 @@ export function ConceptList({ concepts }: { concepts: Concept[] }) {
         onChange={(e) => setQuery(e.target.value)}
       />
       {shown.length === 0 && <p className="muted">검색 결과가 없습니다.</p>}
-      <div className="list">
-        {shown.map((c) => <ConceptCard key={c.title} concept={c} />)}
-      </div>
+      {groups.map((g) => (
+        <section key={g.title} className="concept-section">
+          {g.title && <h2 className="section-title">{g.title}</h2>}
+          <div className="list">
+            {g.concepts.map((c) => <ConceptCard key={c.title} concept={c} />)}
+          </div>
+        </section>
+      ))}
     </>
   )
 }

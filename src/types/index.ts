@@ -11,10 +11,13 @@ export type Concept = {
   tip?: string // 암기 팁 · 핵심 한 줄
 }
 
+export type Section = { title: string; concepts: Concept[] }
+
 export type Subject = {
   id: string
   name: string
   concepts: Concept[]
+  sections?: Section[] // 개념이 많은 과목은 묶음별 제목을 붙여 보여준다 (concepts와 같은 개념)
 }
 
 type QuestionBase = {

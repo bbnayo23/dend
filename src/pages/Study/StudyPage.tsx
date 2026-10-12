@@ -16,7 +16,7 @@ export function StudyPage({ exam }: { exam: ExamType }) {
         <h1>{subject.name}</h1>
         <Link to={`/${exam}/quiz/${subject.id}`} className="btn btn-primary">문제 풀기</Link>
       </div>
-      <ConceptList key={subject.id} concepts={subject.concepts} />
+      <ConceptList key={subject.id} concepts={subject.concepts} sections={subject.sections} />
     </>
   )
 }
