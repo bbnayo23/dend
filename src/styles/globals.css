@@ -302,6 +302,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
   box-shadow: var(--inset), 0 0 0 3px var(--blue-bg);
 }
 
+.filter { display: flex; flex-wrap: wrap; gap: 6px; }
+.section-title { margin-top: 6px; font-size: 15px; font-weight: 700; }
+
 .tag {
   align-self: flex-start;
   padding: 2px 10px;
@@ -309,8 +312,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
   border-radius: 999px;
   background: var(--glass);
   color: var(--muted);
+  font: inherit;
   font-size: 11px;
 }
+button.tag, a.tag { cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+button.tag:hover, a.tag:hover { color: var(--blue-fg); border-color: var(--blue-bg); }
 
 /* details (개념 · 문제 리뷰) */
 details summary {
@@ -367,12 +373,6 @@ details[open] > :not(summary) { animation: fade 0.4s var(--ease) both; }
 .table-wrap td:first-child { font-weight: 700; white-space: nowrap; }
 .table-wrap tr:last-child td { border-bottom: 0; }
 
-.tip {
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  background: var(--sheen), var(--violet-bg);
-  box-shadow: var(--highlight);
-  font-size: 13px;
 /* 비유: 개념을 펼치면 가장 먼저 보이는 쉬운 설명 */
 .analogy {
   margin: 0;
@@ -393,6 +393,12 @@ details[open] > :not(summary) { animation: fade 0.4s var(--ease) both; }
   font-weight: 800;
 }
 
+.tip {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--sheen), var(--violet-bg);
+  box-shadow: var(--highlight);
+  font-size: 13px;
   font-weight: 600;
 }
 .tip::before { content: 'TIP'; margin-right: 6px; color: var(--violet-fg); font-size: 11px; font-weight: 800; }

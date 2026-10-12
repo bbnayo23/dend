@@ -5,6 +5,7 @@ import { ExamPage } from '../pages/Exam/ExamPage'
 import { HomePage } from '../pages/Home/HomePage'
 import { InfoPage } from '../pages/Info/InfoPage'
 import { QuizPage } from '../pages/Quiz/QuizPage'
+import { SearchPage } from '../pages/Search/SearchPage'
 import { StudyPage } from '../pages/Study/StudyPage'
 
 export function AppRoutes() {
@@ -12,6 +13,7 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/info" element={<InfoPage />} />
+      <Route path="/search" element={<SearchPage />} />
       <Route path="/bookmark" element={<BookmarkPage />} />
       {EXAM_TYPES.map((exam) => (
         <Route key={exam} path={exam}>

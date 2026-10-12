@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import type { Concept } from '../../../types'
 import { filterConcepts } from '../study.logic'
 
@@ -23,10 +23,11 @@ export function ConceptList({ concepts }: { concepts: Concept[] }) {
   )
 }
 
-function ConceptCard({ concept: c }: { concept: Concept }) {
+export function ConceptCard({ concept: c, label }: { concept: Concept; label?: ReactNode }) {
   return (
     <details className="card">
       <summary>
+        {label}
         <span className="concept-title">
           <strong>{c.title}</strong>
           {c.level && <span className="stars" aria-label={`출제 빈도 ${c.level}단계`}>{'★'.repeat(c.level)}</span>}
@@ -34,8 +35,8 @@ function ConceptCard({ concept: c }: { concept: Concept }) {
         <span className="muted small">{c.summary}</span>
       </summary>
       <div className="concept-body">
-        {c.points && (
         {c.analogy && <p className="analogy">{c.analogy}</p>}
+        {c.points && (
           <ul className="points">
             {c.points.map((p) => <li key={p}>{p}</li>)}
           </ul>
